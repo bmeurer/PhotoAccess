@@ -10,10 +10,10 @@
 		C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403613B723E4007BEB31 /* UIKit.framework */; };
 		C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403813B723E4007BEB31 /* Foundation.framework */; };
 		C792403B13B723E4007BEB31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403A13B723E4007BEB31 /* CoreGraphics.framework */; };
-		C792404113B723E4007BEB31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C792403F13B723E4007BEB31 /* InfoPlist.strings */; };
 		C792404413B723E4007BEB31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404313B723E4007BEB31 /* main.m */; };
-		C792404713B723E4007BEB31 /* PhotoAccessAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404613B723E4007BEB31 /* PhotoAccessAppDelegate.m */; };
-		C792404A13B723E4007BEB31 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C792404813B723E4007BEB31 /* MainWindow.xib */; };
+		C792404713B723E4007BEB31 /* PAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404613B723E4007BEB31 /* PAAppDelegate.m */; };
+		C792405B13B724CD007BEB31 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C792405A13B724CD007BEB31 /* LICENSE */; };
+		C792406713B725E4007BEB31 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C792406613B725E4007BEB31 /* MainWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,13 +21,13 @@
 		C792403613B723E4007BEB31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C792403813B723E4007BEB31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C792403A13B723E4007BEB31 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C792403E13B723E4007BEB31 /* PhotoAccess-Info.plist */ = {isa = PBXFileReference; path = "PhotoAccess-Info.plist"; sourceTree = "<group>"; };
-		C792404013B723E4007BEB31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C792404213B723E4007BEB31 /* PhotoAccess-Prefix.pch */ = {isa = PBXFileReference; path = "PhotoAccess-Prefix.pch"; sourceTree = "<group>"; };
+		C792403E13B723E4007BEB31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C792404213B723E4007BEB31 /* PhotoAccess-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoAccess-Prefix.pch"; sourceTree = "<group>"; };
 		C792404313B723E4007BEB31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C792404513B723E4007BEB31 /* PhotoAccessAppDelegate.h */ = {isa = PBXFileReference; path = PhotoAccessAppDelegate.h; sourceTree = "<group>"; };
-		C792404613B723E4007BEB31 /* PhotoAccessAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoAccessAppDelegate.m; sourceTree = "<group>"; };
-		C792404913B723E4007BEB31 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		C792404513B723E4007BEB31 /* PAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAAppDelegate.h; sourceTree = "<group>"; };
+		C792404613B723E4007BEB31 /* PAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAAppDelegate.m; sourceTree = "<group>"; };
+		C792405A13B724CD007BEB31 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		C792406613B725E4007BEB31 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,9 @@
 		C792402713B723E4007BEB31 = {
 			isa = PBXGroup;
 			children = (
-				C792403C13B723E4007BEB31 /* PhotoAccess */,
+				C792405013B72435007BEB31 /* Classes */,
+				C792405113B7247D007BEB31 /* Resources */,
+				C792403D13B723E4007BEB31 /* Other Sources */,
 				C792403513B723E4007BEB31 /* Frameworks */,
 				C792403313B723E4007BEB31 /* Products */,
 			);
@@ -64,33 +66,47 @@
 		C792403513B723E4007BEB31 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C792403613B723E4007BEB31 /* UIKit.framework */,
 				C792403813B723E4007BEB31 /* Foundation.framework */,
 				C792403A13B723E4007BEB31 /* CoreGraphics.framework */,
+				C792403613B723E4007BEB31 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C792403C13B723E4007BEB31 /* PhotoAccess */ = {
+		C792403D13B723E4007BEB31 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C792404513B723E4007BEB31 /* PhotoAccessAppDelegate.h */,
-				C792404613B723E4007BEB31 /* PhotoAccessAppDelegate.m */,
-				C792404813B723E4007BEB31 /* MainWindow.xib */,
-				C792403D13B723E4007BEB31 /* Supporting Files */,
-			);
-			path = PhotoAccess;
-			sourceTree = "<group>";
-		};
-		C792403D13B723E4007BEB31 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C792403E13B723E4007BEB31 /* PhotoAccess-Info.plist */,
-				C792403F13B723E4007BEB31 /* InfoPlist.strings */,
 				C792404213B723E4007BEB31 /* PhotoAccess-Prefix.pch */,
 				C792404313B723E4007BEB31 /* main.m */,
 			);
-			name = "Supporting Files";
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		C792405013B72435007BEB31 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C792404513B723E4007BEB31 /* PAAppDelegate.h */,
+				C792404613B723E4007BEB31 /* PAAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C792405113B7247D007BEB31 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C792406413B725BF007BEB31 /* IBFiles */,
+				C792403E13B723E4007BEB31 /* Info.plist */,
+				C792405A13B724CD007BEB31 /* LICENSE */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C792406413B725BF007BEB31 /* IBFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C792406613B725E4007BEB31 /* MainWindow.xib */,
+			);
+			path = IBFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +135,7 @@
 		C792402913B723E4007BEB31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "Universität Siegen";
+				ORGANIZATIONNAME = "Benedikt Meurer";
 			};
 			buildConfigurationList = C792402C13B723E4007BEB31 /* Build configuration list for PBXProject "PhotoAccess" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -143,8 +159,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C792404113B723E4007BEB31 /* InfoPlist.strings in Resources */,
-				C792404A13B723E4007BEB31 /* MainWindow.xib in Resources */,
+				C792405B13B724CD007BEB31 /* LICENSE in Resources */,
+				C792406713B725E4007BEB31 /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,30 +172,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C792404413B723E4007BEB31 /* main.m in Sources */,
-				C792404713B723E4007BEB31 /* PhotoAccessAppDelegate.m in Sources */,
+				C792404713B723E4007BEB31 /* PAAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		C792403F13B723E4007BEB31 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C792404013B723E4007BEB31 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C792404813B723E4007BEB31 /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C792404913B723E4007BEB31 /* en */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C792404B13B723E4007BEB31 /* Debug */ = {
@@ -221,8 +218,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PhotoAccess/PhotoAccess-Prefix.pch";
-				INFOPLIST_FILE = "PhotoAccess/PhotoAccess-Info.plist";
+				GCC_PREFIX_HEADER = "PhotoAccess-Prefix.pch";
+				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -234,8 +231,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PhotoAccess/PhotoAccess-Prefix.pch";
-				INFOPLIST_FILE = "PhotoAccess/PhotoAccess-Info.plist";
+				GCC_PREFIX_HEADER = "PhotoAccess-Prefix.pch";
+				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -261,6 +258,7 @@
 				C792404F13B723E4007BEB31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
