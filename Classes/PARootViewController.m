@@ -38,7 +38,7 @@
 @synthesize imageContainerView = _imageContainerView;
 @synthesize imageView = _imageView;
 @synthesize infoContainerView = _infoContainerView;
-@synthesize photoLibraryButtonItem = _photosButtonItem;
+@synthesize photoLibraryButtonItem = _photoLibraryButtonItem;
 @synthesize cameraButtonItem = _cameraButtonItem;
 @synthesize infoButtonItem = _infoButtonItem;
 
@@ -48,7 +48,7 @@
     [_imageContainerView release];
     [_imageView release];
     [_infoContainerView release];
-    [_photosButtonItem release];
+    [_photoLibraryButtonItem release];
     [_cameraButtonItem release];
     [_infoButtonItem release];
     [super dealloc];
@@ -166,7 +166,7 @@
             self.imageView.image = thumbnailImage;
         }
     }
-    [self imagePickerControllerDidCancel:imagePickerController];
+    [imagePickerController dismissModalViewControllerAnimated:YES];
 }
 
 
@@ -178,16 +178,19 @@
 {
     [super viewDidLoad];
     
+    // Recognize tap gestures on the image container view
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageContainerViewDoubleTapped:)];
-    tapGestureRecognizer.numberOfTapsRequired = 2;
+    tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.numberOfTouchesRequired = 1;
     [_imageContainerView addGestureRecognizer:tapGestureRecognizer];
     [tapGestureRecognizer release];
     
+    // Add drop shadow to the image container view
     _imageContainerView.layer.shadowOpacity = 0.25f;
     _imageContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     _imageContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     
+    // Add drop shadow to the info container view
     _infoContainerView.layer.shadowOpacity = 0.25f;
     _infoContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     _infoContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -201,12 +204,14 @@
 {
     [super viewWillAppear:animated];
     
-    _photosButtonItem.enabled = ([UIImagePickerController isMediaType:(NSString *)kUTTypeImage
-                                               availableForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]
-                                 || [UIImagePickerController isMediaType:(NSString *)kUTTypeImage
-                                                  availableForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum]);
-    _cameraButtonItem.enabled = [UIImagePickerController isMediaType:(NSString *)kUTTypeImage
-                                              availableForSourceType:UIImagePickerControllerSourceTypeCamera];
+    // Enable/disable the Photo Library and Camera buttons depending on whether the
+    // device includes a photo library (most probably) and/or a camera
+    self.photoLibraryButtonItem.enabled = ([UIImagePickerController isMediaType:(NSString *)kUTTypeImage
+                                                         availableForSourceType:UIImagePickerControllerSourceTypePhotoLibrary]
+                                           || [UIImagePickerController isMediaType:(NSString *)kUTTypeImage
+                                                            availableForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum]);
+    self.cameraButtonItem.enabled = [UIImagePickerController isMediaType:(NSString *)kUTTypeImage
+                                                  availableForSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 
