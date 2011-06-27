@@ -7,20 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7595A2413B7C1D0001219F6 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2213B7C1D0001219F6 /* Logo.png */; };
+		C7595A2513B7C1D0001219F6 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2313B7C1D0001219F6 /* Logo@2x.png */; };
+		C7595A2C13B7C6D6001219F6 /* ImageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2813B7C6D6001219F6 /* ImageBackground.png */; };
+		C7595A2D13B7C6D6001219F6 /* ImageBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2913B7C6D6001219F6 /* ImageBackground@2x.png */; };
+		C7595A3013B87685001219F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7595A2F13B87685001219F6 /* CoreGraphics.framework */; };
+		C7595A3213B8768A001219F6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7595A3113B8768A001219F6 /* MobileCoreServices.framework */; };
+		C7595A4913B8A34D001219F6 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A4813B8A34D001219F6 /* UIImage+Resize.m */; };
+		C7595A4E13B8A3FC001219F6 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A4B13B8A3FC001219F6 /* UIImage+Alpha.m */; };
+		C7595A4F13B8A3FC001219F6 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A4D13B8A3FC001219F6 /* UIImage+RoundedCorner.m */; };
+		C7595A8413B8C420001219F6 /* UIImagePickerController+PhotoAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */; };
 		C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403613B723E4007BEB31 /* UIKit.framework */; };
 		C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403813B723E4007BEB31 /* Foundation.framework */; };
-		C792403B13B723E4007BEB31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403A13B723E4007BEB31 /* CoreGraphics.framework */; };
 		C792404413B723E4007BEB31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404313B723E4007BEB31 /* main.m */; };
 		C792404713B723E4007BEB31 /* PAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404613B723E4007BEB31 /* PAAppDelegate.m */; };
-		C792405B13B724CD007BEB31 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C792405A13B724CD007BEB31 /* LICENSE */; };
 		C792406713B725E4007BEB31 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C792406613B725E4007BEB31 /* MainWindow.xib */; };
+		C792406F13B7380F007BEB31 /* PARootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C792406D13B7380F007BEB31 /* PARootViewController.m */; };
+		C792407013B7380F007BEB31 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C792406E13B7380F007BEB31 /* RootViewController.xib */; };
+		C792407313B789D7007BEB31 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407113B789D7007BEB31 /* Background.png */; };
+		C792407413B789D7007BEB31 /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407213B789D7007BEB31 /* Background@2x.png */; };
+		C792407613B78C69007BEB31 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792407513B78C69007BEB31 /* QuartzCore.framework */; };
+		C792407813B7991A007BEB31 /* Photos.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407713B7991A007BEB31 /* Photos.png */; };
+		C792407A13B79AB8007BEB31 /* Photos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407913B79AB8007BEB31 /* Photos@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C7595A2213B7C1D0001219F6 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		C7595A2313B7C1D0001219F6 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
+		C7595A2813B7C6D6001219F6 /* ImageBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageBackground.png; sourceTree = "<group>"; };
+		C7595A2913B7C6D6001219F6 /* ImageBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageBackground@2x.png"; sourceTree = "<group>"; };
+		C7595A2F13B87685001219F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C7595A3113B8768A001219F6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C7595A4713B8A34D001219F6 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		C7595A4813B8A34D001219F6 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		C7595A4A13B8A3FC001219F6 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		C7595A4B13B8A3FC001219F6 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		C7595A4C13B8A3FC001219F6 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		C7595A4D13B8A3FC001219F6 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		C7595A8213B8C420001219F6 /* UIImagePickerController+PhotoAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+PhotoAccess.h"; sourceTree = "<group>"; };
+		C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+PhotoAccess.m"; sourceTree = "<group>"; };
 		C792403213B723E4007BEB31 /* PhotoAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C792403613B723E4007BEB31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C792403813B723E4007BEB31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		C792403A13B723E4007BEB31 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C792403E13B723E4007BEB31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C792404213B723E4007BEB31 /* PhotoAccess-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoAccess-Prefix.pch"; sourceTree = "<group>"; };
 		C792404313B723E4007BEB31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -28,6 +56,14 @@
 		C792404613B723E4007BEB31 /* PAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAAppDelegate.m; sourceTree = "<group>"; };
 		C792405A13B724CD007BEB31 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C792406613B725E4007BEB31 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		C792406C13B7380F007BEB31 /* PARootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARootViewController.h; sourceTree = "<group>"; };
+		C792406D13B7380F007BEB31 /* PARootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARootViewController.m; sourceTree = "<group>"; };
+		C792406E13B7380F007BEB31 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		C792407113B789D7007BEB31 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		C792407213B789D7007BEB31 /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
+		C792407513B78C69007BEB31 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C792407713B7991A007BEB31 /* Photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photos.png; sourceTree = "<group>"; };
+		C792407913B79AB8007BEB31 /* Photos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photos@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,15 +71,56 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */,
+				C7595A3013B87685001219F6 /* CoreGraphics.framework in Frameworks */,
 				C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */,
-				C792403B13B723E4007BEB31 /* CoreGraphics.framework in Frameworks */,
+				C7595A3213B8768A001219F6 /* MobileCoreServices.framework in Frameworks */,
+				C792407613B78C69007BEB31 /* QuartzCore.framework in Frameworks */,
+				C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7595A3C13B89CCB001219F6 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C792406C13B7380F007BEB31 /* PARootViewController.h */,
+				C792406D13B7380F007BEB31 /* PARootViewController.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		C7595A4213B8A2B4001219F6 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				C7595A4313B8A2C0001219F6 /* TrevorHarmon */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		C7595A4313B8A2C0001219F6 /* TrevorHarmon */ = {
+			isa = PBXGroup;
+			children = (
+				C7595A4A13B8A3FC001219F6 /* UIImage+Alpha.h */,
+				C7595A4B13B8A3FC001219F6 /* UIImage+Alpha.m */,
+				C7595A4713B8A34D001219F6 /* UIImage+Resize.h */,
+				C7595A4813B8A34D001219F6 /* UIImage+Resize.m */,
+				C7595A4C13B8A3FC001219F6 /* UIImage+RoundedCorner.h */,
+				C7595A4D13B8A3FC001219F6 /* UIImage+RoundedCorner.m */,
+			);
+			path = TrevorHarmon;
+			sourceTree = "<group>";
+		};
+		C7595A8013B8C3E2001219F6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C7595A8213B8C420001219F6 /* UIImagePickerController+PhotoAccess.h */,
+				C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C792402713B723E4007BEB31 = {
 			isa = PBXGroup;
 			children = (
@@ -66,8 +143,10 @@
 		C792403513B723E4007BEB31 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7595A2F13B87685001219F6 /* CoreGraphics.framework */,
 				C792403813B723E4007BEB31 /* Foundation.framework */,
-				C792403A13B723E4007BEB31 /* CoreGraphics.framework */,
+				C7595A3113B8768A001219F6 /* MobileCoreServices.framework */,
+				C792407513B78C69007BEB31 /* QuartzCore.framework */,
 				C792403613B723E4007BEB31 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -85,6 +164,9 @@
 		C792405013B72435007BEB31 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C7595A4213B8A2B4001219F6 /* External */,
+				C7595A8013B8C3E2001219F6 /* Extensions */,
+				C7595A3C13B89CCB001219F6 /* View Controller */,
 				C792404513B723E4007BEB31 /* PAAppDelegate.h */,
 				C792404613B723E4007BEB31 /* PAAppDelegate.m */,
 			);
@@ -94,6 +176,7 @@
 		C792405113B7247D007BEB31 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C792406813B733E9007BEB31 /* Images */,
 				C792406413B725BF007BEB31 /* IBFiles */,
 				C792403E13B723E4007BEB31 /* Info.plist */,
 				C792405A13B724CD007BEB31 /* LICENSE */,
@@ -105,8 +188,24 @@
 			isa = PBXGroup;
 			children = (
 				C792406613B725E4007BEB31 /* MainWindow.xib */,
+				C792406E13B7380F007BEB31 /* RootViewController.xib */,
 			);
 			path = IBFiles;
+			sourceTree = "<group>";
+		};
+		C792406813B733E9007BEB31 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				C7595A2813B7C6D6001219F6 /* ImageBackground.png */,
+				C7595A2913B7C6D6001219F6 /* ImageBackground@2x.png */,
+				C7595A2213B7C1D0001219F6 /* Logo.png */,
+				C7595A2313B7C1D0001219F6 /* Logo@2x.png */,
+				C792407713B7991A007BEB31 /* Photos.png */,
+				C792407913B79AB8007BEB31 /* Photos@2x.png */,
+				C792407113B789D7007BEB31 /* Background.png */,
+				C792407213B789D7007BEB31 /* Background@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,8 +258,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C792405B13B724CD007BEB31 /* LICENSE in Resources */,
 				C792406713B725E4007BEB31 /* MainWindow.xib in Resources */,
+				C792407013B7380F007BEB31 /* RootViewController.xib in Resources */,
+				C792407313B789D7007BEB31 /* Background.png in Resources */,
+				C792407413B789D7007BEB31 /* Background@2x.png in Resources */,
+				C792407813B7991A007BEB31 /* Photos.png in Resources */,
+				C792407A13B79AB8007BEB31 /* Photos@2x.png in Resources */,
+				C7595A2413B7C1D0001219F6 /* Logo.png in Resources */,
+				C7595A2513B7C1D0001219F6 /* Logo@2x.png in Resources */,
+				C7595A2C13B7C6D6001219F6 /* ImageBackground.png in Resources */,
+				C7595A2D13B7C6D6001219F6 /* ImageBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +280,11 @@
 			files = (
 				C792404413B723E4007BEB31 /* main.m in Sources */,
 				C792404713B723E4007BEB31 /* PAAppDelegate.m in Sources */,
+				C792406F13B7380F007BEB31 /* PARootViewController.m in Sources */,
+				C7595A4913B8A34D001219F6 /* UIImage+Resize.m in Sources */,
+				C7595A4E13B8A3FC001219F6 /* UIImage+Alpha.m in Sources */,
+				C7595A4F13B8A3FC001219F6 /* UIImage+RoundedCorner.m in Sources */,
+				C7595A8413B8C420001219F6 /* UIImagePickerController+PhotoAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

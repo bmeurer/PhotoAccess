@@ -25,13 +25,15 @@
  * SUCH DAMAGE.
  */
 
-#import <Availability.h>
+#include <Availability.h>
 
 #ifndef __IPHONE_3_0
-#warning "This project uses features only available in iPhone SDK 3.0 and later."
+# warning "This project uses features only available in iPhone SDK 3.0 and later."
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+# import <Foundation/Foundation.h>
+# import <MobileCoreServices/MobileCoreServices.h>
+# import <QuartzCore/QuartzCore.h>
+# import <UIKit/UIKit.h>
 #endif

@@ -25,30 +25,17 @@
  * SUCH DAMAGE.
  */
 
-#import "PAAppDelegate.h"
+#import <UIKit/UIKit.h>
 
 
-@implementation PAAppDelegate
+@interface UIImagePickerController (PhotoAccess)
 
-@synthesize window = _window;
-
-
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
-
-
-#pragma mark -
-#pragma mark UIApplicationDelegate
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self.window makeKeyAndVisible];
-    return YES;
-}
-
+/** Returns a Boolean value indicating whether a media type is available for a supported source.
+ 
+ @param mediaType The media type.
+ @param sourceType The source type.
+ @return `YES` if the media type is available for the source, `NO` otherwise.
+ */
++ (BOOL)isMediaType:(NSString *)mediaType availableForSourceType:(UIImagePickerControllerSourceType)sourceType;
 
 @end

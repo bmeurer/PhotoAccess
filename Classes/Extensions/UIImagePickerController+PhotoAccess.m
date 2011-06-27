@@ -25,29 +25,22 @@
  * SUCH DAMAGE.
  */
 
-#import "PAAppDelegate.h"
+#import "UIImagePickerController+PhotoAccess.h"
 
 
-@implementation PAAppDelegate
-
-@synthesize window = _window;
+@implementation UIImagePickerController (PhotoAccess)
 
 
-- (void)dealloc
++ (BOOL)isMediaType:(NSString *)mediaType availableForSourceType:(UIImagePickerControllerSourceType)sourceType
 {
-    [_window release];
-    [super dealloc];
-}
-
-
-#pragma mark -
-#pragma mark UIApplicationDelegate
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self.window makeKeyAndVisible];
-    return YES;
+    if (mediaType && [self isSourceTypeAvailable:sourceType]) {
+        for (NSString *availableMediaType in [self availableMediaTypesForSourceType:sourceType]) {
+            if ([mediaType isEqualToString:availableMediaType]) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 

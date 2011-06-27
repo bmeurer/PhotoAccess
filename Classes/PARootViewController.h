@@ -25,30 +25,26 @@
  * SUCH DAMAGE.
  */
 
-#import "PAAppDelegate.h"
+#import <UIKit/UIKit.h>
 
 
-@implementation PAAppDelegate
+@interface PARootViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@synthesize window = _window;
+///----------------
+/// @name IBOutlets
+///----------------
+@property (nonatomic, retain) IBOutlet UIView *imageContainerView;
+@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UIView *infoContainerView;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *photoLibraryButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *cameraButtonItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *infoButtonItem;
 
-
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
-
-
-#pragma mark -
-#pragma mark UIApplicationDelegate
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self.window makeKeyAndVisible];
-    return YES;
-}
-
+///----------------
+/// @name IBActions
+///----------------
+- (IBAction)presentImagePickerControllerForSender:(id)sender;
+- (IBAction)infoButtonItemDidActivate:(id)sender;
+- (IBAction)imageContainerViewDoubleTapped:(id)sender;
 
 @end
