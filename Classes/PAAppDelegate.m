@@ -25,6 +25,7 @@
  * SUCH DAMAGE.
  */
 
+#import "DDTTYLogger.h"
 #import "PAAppDelegate.h"
 
 
@@ -46,6 +47,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Configure the CocoaLumberjack logging framework.
+    // For now, just log everything to the Xcode console.
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
     [self.window makeKeyAndVisible];
     return YES;
 }
