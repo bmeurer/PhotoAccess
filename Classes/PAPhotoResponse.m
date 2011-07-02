@@ -79,12 +79,21 @@
 
 - (NSData *)readDataOfLength:(NSUInteger)length
 {
-    NSRange range = NSMakeRange(_offset, length);
-    if (range.location + range.length > [_data length]) {
-        range.length = [_data length] - range.location;
+    uint8_t *data = (uint8_t *)[_data bytes] + _offset;
+    NSUInteger dataLength = [_data length];
+    if (_offset > dataLength) {
+        dataLength = 0;
     }
-    _offset += range.length;
-    return [_data subdataWithRange:range];
+    else if (length + _offset > dataLength) {
+        dataLength -= _offset;
+    }
+    else {
+        dataLength = length;
+    }
+    _offset += dataLength;
+    return [NSData dataWithBytesNoCopy:data
+                                length:dataLength
+                          freeWhenDone:NO];
 }
 
 
