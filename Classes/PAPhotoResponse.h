@@ -25,11 +25,15 @@
  * SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+#import "HTTPResponse.h"
 
 
-@interface PAAppDelegate : NSObject <UIApplicationDelegate>
+@interface PAPhotoResponse : NSObject <HTTPResponse> {
+@private
+    NSData *_data;
+    UInt64  _offset;
+}
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+- (id)initWithData:(NSData *)data;
 
 @end

@@ -25,18 +25,19 @@
  * SUCH DAMAGE.
  */
 
-#include <Availability.h>
+#import <Foundation/Foundation.h>
 
-#ifndef __IPHONE_3_0
-# warning "This project uses features only available in iPhone SDK 3.0 and later."
-#endif
 
-#include <CFNetwork/CFNetwork.h>
-#include <CommonCrypto/CommonDigest.h>
+@interface NSObject (PhotoAccess)
 
-#ifdef __OBJC__
-# import <Foundation/Foundation.h>
-# import <MobileCoreServices/MobileCoreServices.h>
-# import <QuartzCore/QuartzCore.h>
-# import <UIKit/UIKit.h>
-#endif
+
+/** Execute a block on the main thread using the default mode.
+ 
+ @param aBlock A block to execute on the main thread.
+ @param wait A boolean that specifies whether the current thread should block
+        until the block is executed.
+ */
+- (void)performBlockOnMainThread:(void (^)())aBlock waitUntilDone:(BOOL)wait;
+
+
+@end

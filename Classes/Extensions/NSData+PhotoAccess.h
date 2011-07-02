@@ -25,35 +25,15 @@
  * SUCH DAMAGE.
  */
 
-#import "DDTTYLogger.h"
-#import "PAAppDelegate.h"
+#import <Foundation/Foundation.h>
 
 
-@implementation PAAppDelegate
+@interface NSData (PhotoAccess)
 
-@synthesize window = _window;
+/** Returns the base64 encoding of the bytes within this NSData. */
+- (NSString *)base64Encoding;
 
-
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
-
-
-#pragma mark -
-#pragma mark UIApplicationDelegate
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Configure the CocoaLumberjack logging framework.
-    // For now, just log everything to the Xcode console.
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-
-    [self.window makeKeyAndVisible];
-    return YES;
-}
-
+/** Returns the MD5 digest of the bytes within this NSData. */
+- (NSData *)MD5Digest;
 
 @end

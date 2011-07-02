@@ -25,18 +25,84 @@
  * SUCH DAMAGE.
  */
 
-#include <Availability.h>
+#import "NSData+PhotoAccess.h"
 
-#ifndef __IPHONE_3_0
-# warning "This project uses features only available in iPhone SDK 3.0 and later."
-#endif
+#import "PAPhotoResponse.h"
 
-#include <CFNetwork/CFNetwork.h>
-#include <CommonCrypto/CommonDigest.h>
 
-#ifdef __OBJC__
-# import <Foundation/Foundation.h>
-# import <MobileCoreServices/MobileCoreServices.h>
-# import <QuartzCore/QuartzCore.h>
-# import <UIKit/UIKit.h>
-#endif
+@implementation PAPhotoResponse
+
+
+- (id)initWithData:(NSData *)data
+{
+    self = [super init];
+    if (self) {
+        _data = [data copy];
+        if (!_data) {
+            [self release];
+            return nil;
+        }
+        _offset = 0;
+    }
+    return self;
+}
+
+
+- (void)dealloc
+{
+    [_data release];
+    [super dealloc];
+}
+
+
+#pragma mark -
+#pragma mark HTTPResponse
+
+
+- (UInt64)contentLength
+{
+    return [_data length];
+}
+
+
+- (UInt64)offset
+{
+    return _offset;
+}
+
+
+- (void)setOffset:(UInt64)offset
+{
+    _offset = offset;
+}
+
+
+- (NSData *)readDataOfLength:(NSUInteger)length
+{
+    NSRange range = NSMakeRange(_offset, length);
+    if (range.location + range.length > [_data length]) {
+        range.length = [_data length] - range.location;
+    }
+    _offset += range.length;
+    return [_data subdataWithRange:range];
+}
+
+
+- (BOOL)isDone
+{
+    return ([self offset] >= [self contentLength]);
+}
+
+
+- (NSDictionary *)httpHeaders
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            @"no-cache", @"Cache-Control",
+            @"image/jpeg", @"Content-Type",
+            [[_data MD5Digest] base64Encoding], @"Content-MD5",
+            @"no-cache", @"Pragma",
+            nil];
+}
+
+
+@end

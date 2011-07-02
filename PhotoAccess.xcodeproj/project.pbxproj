@@ -20,15 +20,15 @@
 		C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403613B723E4007BEB31 /* UIKit.framework */; };
 		C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403813B723E4007BEB31 /* Foundation.framework */; };
 		C792404413B723E4007BEB31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404313B723E4007BEB31 /* main.m */; };
-		C792404713B723E4007BEB31 /* PAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404613B723E4007BEB31 /* PAAppDelegate.m */; };
+		C792404713B723E4007BEB31 /* PAController.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404613B723E4007BEB31 /* PAController.m */; };
 		C792406713B725E4007BEB31 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C792406613B725E4007BEB31 /* MainWindow.xib */; };
 		C792406F13B7380F007BEB31 /* PARootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C792406D13B7380F007BEB31 /* PARootViewController.m */; };
-		C792407013B7380F007BEB31 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C792406E13B7380F007BEB31 /* RootViewController.xib */; };
 		C792407313B789D7007BEB31 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407113B789D7007BEB31 /* Background.png */; };
 		C792407413B789D7007BEB31 /* Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407213B789D7007BEB31 /* Background@2x.png */; };
 		C792407613B78C69007BEB31 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792407513B78C69007BEB31 /* QuartzCore.framework */; };
 		C792407813B7991A007BEB31 /* Photos.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407713B7991A007BEB31 /* Photos.png */; };
 		C792407A13B79AB8007BEB31 /* Photos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C792407913B79AB8007BEB31 /* Photos@2x.png */; };
+		C7E06A3313BCE8A0001E3999 /* PAConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E06A3213BCE8A0001E3999 /* PAConnection.m */; };
 		C7E535BE13B8F167005F6F07 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E5358613B8F167005F6F07 /* DDData.m */; };
 		C7E535BF13B8F167005F6F07 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E5358813B8F167005F6F07 /* DDNumber.m */; };
 		C7E535C013B8F167005F6F07 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E5358A13B8F167005F6F07 /* DDRange.m */; };
@@ -49,6 +49,10 @@
 		C7E535D613B8F167005F6F07 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E535BB13B8F167005F6F07 /* DDLog.m */; };
 		C7E535D713B8F167005F6F07 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E535BD13B8F167005F6F07 /* DDTTYLogger.m */; };
 		C7E535E313B8F369005F6F07 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E535E213B8F369005F6F07 /* CFNetwork.framework */; };
+		C7E535E513B90039005F6F07 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = C7E535E413B90039005F6F07 /* Web */; };
+		C7F1F34013BF3A0F00F1DED1 /* NSObject+PhotoAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F1F33F13BF3A0F00F1DED1 /* NSObject+PhotoAccess.m */; };
+		C7F1F34313BF45B100F1DED1 /* PAPhotoResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F1F34213BF45B100F1DED1 /* PAPhotoResponse.m */; };
+		C7F1F34613BF803C00F1DED1 /* NSData+PhotoAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F1F34513BF803C00F1DED1 /* NSData+PhotoAccess.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,18 +76,19 @@
 		C792403E13B723E4007BEB31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C792404213B723E4007BEB31 /* PhotoAccess-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoAccess-Prefix.pch"; sourceTree = "<group>"; };
 		C792404313B723E4007BEB31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C792404513B723E4007BEB31 /* PAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAAppDelegate.h; sourceTree = "<group>"; };
-		C792404613B723E4007BEB31 /* PAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAAppDelegate.m; sourceTree = "<group>"; };
+		C792404513B723E4007BEB31 /* PAController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAController.h; sourceTree = "<group>"; };
+		C792404613B723E4007BEB31 /* PAController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAController.m; sourceTree = "<group>"; };
 		C792405A13B724CD007BEB31 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C792406613B725E4007BEB31 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		C792406C13B7380F007BEB31 /* PARootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARootViewController.h; sourceTree = "<group>"; };
 		C792406D13B7380F007BEB31 /* PARootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARootViewController.m; sourceTree = "<group>"; };
-		C792406E13B7380F007BEB31 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		C792407113B789D7007BEB31 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		C792407213B789D7007BEB31 /* Background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Background@2x.png"; sourceTree = "<group>"; };
 		C792407513B78C69007BEB31 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C792407713B7991A007BEB31 /* Photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photos.png; sourceTree = "<group>"; };
 		C792407913B79AB8007BEB31 /* Photos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photos@2x.png"; sourceTree = "<group>"; };
+		C7E06A3113BCE8A0001E3999 /* PAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAConnection.h; sourceTree = "<group>"; };
+		C7E06A3213BCE8A0001E3999 /* PAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAConnection.m; sourceTree = "<group>"; };
 		C7E5358513B8F167005F6F07 /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDData.h; sourceTree = "<group>"; };
 		C7E5358613B8F167005F6F07 /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
 		C7E5358713B8F167005F6F07 /* DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNumber.h; sourceTree = "<group>"; };
@@ -125,6 +130,13 @@
 		C7E535BC13B8F167005F6F07 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
 		C7E535BD13B8F167005F6F07 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		C7E535E213B8F369005F6F07 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C7E535E413B90039005F6F07 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+		C7F1F33E13BF3A0F00F1DED1 /* NSObject+PhotoAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PhotoAccess.h"; sourceTree = "<group>"; };
+		C7F1F33F13BF3A0F00F1DED1 /* NSObject+PhotoAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PhotoAccess.m"; sourceTree = "<group>"; };
+		C7F1F34113BF45B100F1DED1 /* PAPhotoResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoResponse.h; sourceTree = "<group>"; };
+		C7F1F34213BF45B100F1DED1 /* PAPhotoResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoResponse.m; sourceTree = "<group>"; };
+		C7F1F34413BF803C00F1DED1 /* NSData+PhotoAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PhotoAccess.h"; sourceTree = "<group>"; };
+		C7F1F34513BF803C00F1DED1 /* NSData+PhotoAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+PhotoAccess.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,13 +156,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C7595A3C13B89CCB001219F6 /* View Controller */ = {
+		C7595A3C13B89CCB001219F6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C792404513B723E4007BEB31 /* PAController.h */,
+				C792404613B723E4007BEB31 /* PAController.m */,
 				C792406C13B7380F007BEB31 /* PARootViewController.h */,
 				C792406D13B7380F007BEB31 /* PARootViewController.m */,
 			);
-			name = "View Controller";
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		C7595A4213B8A2B4001219F6 /* External */ = {
@@ -178,6 +192,10 @@
 		C7595A8013B8C3E2001219F6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C7F1F34413BF803C00F1DED1 /* NSData+PhotoAccess.h */,
+				C7F1F34513BF803C00F1DED1 /* NSData+PhotoAccess.m */,
+				C7F1F33E13BF3A0F00F1DED1 /* NSObject+PhotoAccess.h */,
+				C7F1F33F13BF3A0F00F1DED1 /* NSObject+PhotoAccess.m */,
 				C7595A8213B8C420001219F6 /* UIImagePickerController+PhotoAccess.h */,
 				C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */,
 			);
@@ -230,9 +248,8 @@
 			children = (
 				C7595A4213B8A2B4001219F6 /* External */,
 				C7595A8013B8C3E2001219F6 /* Extensions */,
-				C7595A3C13B89CCB001219F6 /* View Controller */,
-				C792404513B723E4007BEB31 /* PAAppDelegate.h */,
-				C792404613B723E4007BEB31 /* PAAppDelegate.m */,
+				C7E06A3013BCE87A001E3999 /* HTTP */,
+				C7595A3C13B89CCB001219F6 /* Controller */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -242,6 +259,7 @@
 			children = (
 				C792406813B733E9007BEB31 /* Images */,
 				C792406413B725BF007BEB31 /* IBFiles */,
+				C7E535E413B90039005F6F07 /* Web */,
 				C792403E13B723E4007BEB31 /* Info.plist */,
 				C792405A13B724CD007BEB31 /* LICENSE */,
 			);
@@ -252,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				C792406613B725E4007BEB31 /* MainWindow.xib */,
-				C792406E13B7380F007BEB31 /* RootViewController.xib */,
 			);
 			path = IBFiles;
 			sourceTree = "<group>";
@@ -270,6 +287,17 @@
 				C792407213B789D7007BEB31 /* Background@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		C7E06A3013BCE87A001E3999 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				C7E06A3113BCE8A0001E3999 /* PAConnection.h */,
+				C7E06A3213BCE8A0001E3999 /* PAConnection.m */,
+				C7F1F34113BF45B100F1DED1 /* PAPhotoResponse.h */,
+				C7F1F34213BF45B100F1DED1 /* PAPhotoResponse.m */,
+			);
+			name = HTTP;
 			sourceTree = "<group>";
 		};
 		C7E5358113B8F12C005F6F07 /* CocoaHTTPServer */ = {
@@ -418,7 +446,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C792406713B725E4007BEB31 /* MainWindow.xib in Resources */,
-				C792407013B7380F007BEB31 /* RootViewController.xib in Resources */,
 				C792407313B789D7007BEB31 /* Background.png in Resources */,
 				C792407413B789D7007BEB31 /* Background@2x.png in Resources */,
 				C792407813B7991A007BEB31 /* Photos.png in Resources */,
@@ -427,6 +454,7 @@
 				C7595A2513B7C1D0001219F6 /* Logo@2x.png in Resources */,
 				C7595A2C13B7C6D6001219F6 /* ImageBackground.png in Resources */,
 				C7595A2D13B7C6D6001219F6 /* ImageBackground@2x.png in Resources */,
+				C7E535E513B90039005F6F07 /* Web in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C792404413B723E4007BEB31 /* main.m in Sources */,
-				C792404713B723E4007BEB31 /* PAAppDelegate.m in Sources */,
+				C792404713B723E4007BEB31 /* PAController.m in Sources */,
 				C792406F13B7380F007BEB31 /* PARootViewController.m in Sources */,
 				C7595A4913B8A34D001219F6 /* UIImage+Resize.m in Sources */,
 				C7595A4E13B8A3FC001219F6 /* UIImage+Alpha.m in Sources */,
@@ -463,6 +491,10 @@
 				C7E535D513B8F167005F6F07 /* DDFileLogger.m in Sources */,
 				C7E535D613B8F167005F6F07 /* DDLog.m in Sources */,
 				C7E535D713B8F167005F6F07 /* DDTTYLogger.m in Sources */,
+				C7E06A3313BCE8A0001E3999 /* PAConnection.m in Sources */,
+				C7F1F34013BF3A0F00F1DED1 /* NSObject+PhotoAccess.m in Sources */,
+				C7F1F34313BF45B100F1DED1 /* PAPhotoResponse.m in Sources */,
+				C7F1F34613BF803C00F1DED1 /* NSData+PhotoAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +524,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = NS_BLOCK_ASSERTIONS;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -509,8 +542,18 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoAccess-Prefix.pch";
+				GCC_VERSION = "";
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -520,10 +563,24 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoAccess-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = NS_BLOCK_ASSERTIONS;
+				GCC_VERSION = "";
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_STYLE = debugging;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

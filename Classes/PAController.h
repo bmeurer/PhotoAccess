@@ -25,18 +25,47 @@
  * SUCH DAMAGE.
  */
 
-#include <Availability.h>
+#import <UIKit/UIKit.h>
 
-#ifndef __IPHONE_3_0
-# warning "This project uses features only available in iPhone SDK 3.0 and later."
-#endif
+#import "HTTPServer.h"
 
-#include <CFNetwork/CFNetwork.h>
-#include <CommonCrypto/CommonDigest.h>
 
-#ifdef __OBJC__
-# import <Foundation/Foundation.h>
-# import <MobileCoreServices/MobileCoreServices.h>
-# import <QuartzCore/QuartzCore.h>
-# import <UIKit/UIKit.h>
-#endif
+enum {
+    PAControllerStateIdle = 0,
+    PAControllerStateError,
+    PAControllerStateServing
+};
+typedef NSUInteger PAControllerStateType;
+
+
+@interface PAController : NSObject <UIApplicationDelegate> {
+@private
+    NSError              *_error;
+    HTTPServer           *_httpServer;
+    UIImage              *_image;
+    NSData               *_photoData;
+    NSData               *_photoThumbnailData;
+    PAControllerStateType _state;
+}
+
+/** The selected image or `nil`. */
+@property (nonatomic, retain) UIImage *image;
+
+@property (readonly, copy) NSData *photoData;
+@property (readonly, copy) NSData *photoThumbnailData;
+
+/** The current state of this PAController. */
+@property (nonatomic, readonly, assign) PAControllerStateType state;
+@property (nonatomic, readonly, retain) NSError *error;
+@property (nonatomic, readonly, retain) NSURL *serverURL;
+
+/** The key window. */
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+
+/** Returns the shared PAController instance.
+ 
+ @return The shared PAController instance.
+ */
++ (PAController *)controller;
+
+@end

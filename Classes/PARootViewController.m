@@ -28,6 +28,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "PAController.h"
 #import "PARootViewController.h"
 #import "UIImage+Resize.h"
 #import "UIImagePickerController+PhotoAccess.h"
@@ -35,9 +36,11 @@
 
 @implementation PARootViewController
 
+@synthesize controller = _controller;
 @synthesize imageContainerView = _imageContainerView;
 @synthesize imageView = _imageView;
-@synthesize infoContainerView = _infoContainerView;
+@synthesize stateContainerView = _stateContainerView;
+@synthesize stateLabel = _stateLabel;
 @synthesize photoLibraryButtonItem = _photoLibraryButtonItem;
 @synthesize cameraButtonItem = _cameraButtonItem;
 @synthesize infoButtonItem = _infoButtonItem;
@@ -45,13 +48,81 @@
 
 - (void)dealloc
 {
-    [_imageContainerView release];
-    [_imageView release];
-    [_infoContainerView release];
-    [_photoLibraryButtonItem release];
-    [_cameraButtonItem release];
-    [_infoButtonItem release];
+    self.controller = nil;
+    self.imageContainerView = nil;
+    self.imageView = nil;
+    self.stateContainerView = nil;
+    self.stateLabel = nil;
+    self.photoLibraryButtonItem = nil;
+    self.cameraButtonItem = nil;
+    self.infoButtonItem = nil;
     [super dealloc];
+}
+
+
+#pragma mark -
+#pragma mark Key-Value Observing
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (object == self.controller && [keyPath isEqualToString:@"image"]) {
+        // Generate a thumbnail of the selected image and display it within the imageView
+        self.imageView.image = [self.controller.image thumbnailImage:self.imageView.frame.size.width
+                                                   transparentBorder:0
+                                                        cornerRadius:0
+                                                interpolationQuality:kCGInterpolationHigh];
+    }
+    else if (object == self.controller && [keyPath isEqualToString:@"state"]) {
+        // TODO
+        switch (self.controller.state) {
+            case PAControllerStateIdle:
+                self.stateLabel.text = @"IDLE";
+                break;
+                
+            case PAControllerStateError:
+                self.stateLabel.text = [NSString stringWithFormat:@"ERROR: %@", self.controller.error];
+                break;
+                
+            case PAControllerStateServing:
+                self.stateLabel.text = [NSString stringWithFormat:@"SERVING AT %@", self.controller.serverURL];
+                break;
+        }
+    }
+}
+
+
+#pragma mark -
+#pragma mark Properties
+
+
+- (void)setController:(PAController *)controller
+{
+    if (_controller != controller) {
+        [_controller removeObserver:self forKeyPath:@"image"];
+        [_controller removeObserver:self forKeyPath:@"state"];
+        [_controller release];
+        _controller = [controller retain];
+        [_controller addObserver:self
+                      forKeyPath:@"image"
+                         options:(NSKeyValueObservingOptionNew
+                                  | NSKeyValueObservingOptionOld)
+                         context:NULL];
+        [_controller addObserver:self
+                      forKeyPath:@"state"
+                         options:(NSKeyValueObservingOptionNew
+                                  | NSKeyValueObservingOptionOld)
+                         context:NULL];
+        
+        // Post (delayed) change notifications for "state"
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [_controller willChangeValueForKey:@"state"];
+            [_controller didChangeValueForKey:@"state"];
+        });
+    }
 }
 
 
@@ -61,6 +132,29 @@
 
 - (IBAction)presentImagePickerControllerForSender:(id)sender
 {
+    // Handling gesture recognition first
+    if ([sender isKindOfClass:[UIGestureRecognizer class]]) {
+        if (self.cameraButtonItem.enabled && self.photoLibraryButtonItem.enabled) {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:NSLocalizedString(@"Take Picture", nil), NSLocalizedString(@"Choose Existing Photo", nil), nil];
+            [actionSheet showFromRect:[self.view convertRect:[[sender view] frame]
+                                                    fromView:[sender view]]
+                               inView:self.view
+                             animated:YES];
+            [actionSheet release];
+            return;
+        }
+        else if (self.cameraButtonItem.enabled) {
+            sender = self.cameraButtonItem;
+        }
+        else if (self.photoLibraryButtonItem.enabled) {
+            sender = self.photoLibraryButtonItem;
+        }
+    }
+
     UIImagePickerControllerSourceType sourceType;
     if (sender == self.cameraButtonItem) {
         sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -101,31 +195,6 @@
 }
 
 
-- (IBAction)imageContainerViewDoubleTapped:(id)sender
-{
-    if (self.cameraButtonItem.enabled && self.photoLibraryButtonItem.enabled) {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                                 delegate:self
-                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                   destructiveButtonTitle:nil
-                                                        otherButtonTitles:NSLocalizedString(@"Take Picture", nil), NSLocalizedString(@"Choose Existing Photo", nil), nil];
-        if ([sender isKindOfClass:[UIView class]]) {
-            [actionSheet showFromRect:[self.view convertRect:[sender frame] fromView:sender] inView:self.view animated:YES];
-        }
-        else {
-            [actionSheet showInView:self.view];
-        }
-        [actionSheet release];
-    }
-    else if (self.cameraButtonItem.enabled) {
-        [self presentImagePickerControllerForSender:self.cameraButtonItem];
-    }
-    else {
-        [self presentImagePickerControllerForSender:self.photoLibraryButtonItem];
-    }
-}
-
-
 #pragma mark -
 #pragma mark UIActionSheetDelegate
 
@@ -159,12 +228,7 @@
     if ([(NSString *)kUTTypeImage isEqualToString:[info objectForKey:UIImagePickerControllerMediaType]]) {
         UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
         UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-        
-        UIImage *image = editedImage ?: originalImage;
-        if (image) {
-            UIImage *thumbnailImage = [image thumbnailImage:self.imageView.frame.size.width transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationHigh];
-            self.imageView.image = thumbnailImage;
-        }
+        self.controller.image = editedImage ?: originalImage;
     }
     [imagePickerController dismissModalViewControllerAnimated:YES];
 }
@@ -179,31 +243,25 @@
     [super viewDidLoad];
     
     // Recognize tap gestures on the image container view
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageContainerViewDoubleTapped:)];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentImagePickerControllerForSender:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.numberOfTouchesRequired = 1;
-    [_imageContainerView addGestureRecognizer:tapGestureRecognizer];
+    [self.imageContainerView addGestureRecognizer:tapGestureRecognizer];
     [tapGestureRecognizer release];
     
     // Add drop shadow to the image container view
-    _imageContainerView.layer.shadowOpacity = 0.25f;
-    _imageContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
-    _imageContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.imageContainerView.layer.shadowOpacity = 0.25f;
+    self.imageContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    self.imageContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     
     // Add drop shadow to the info container view
-    _infoContainerView.layer.shadowOpacity = 0.25f;
-    _infoContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
-    _infoContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _infoContainerView.layer.cornerRadius = 10.0f;
-    _infoContainerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _infoContainerView.layer.borderWidth = 1.0f;
-}
+    self.stateContainerView.layer.shadowOpacity = 0.25f;
+    self.stateContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    self.stateContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.stateContainerView.layer.cornerRadius = 10.0f;
+    self.stateContainerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.stateContainerView.layer.borderWidth = 1.0f;
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     // Enable/disable the Photo Library and Camera buttons depending on whether the
     // device includes a photo library (most probably) and/or a camera
     self.photoLibraryButtonItem.enabled = ([UIImagePickerController isMediaType:(NSString *)kUTTypeImage

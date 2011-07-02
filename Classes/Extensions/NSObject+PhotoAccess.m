@@ -25,18 +25,35 @@
  * SUCH DAMAGE.
  */
 
-#include <Availability.h>
+#import "NSObject+PhotoAccess.h"
 
-#ifndef __IPHONE_3_0
-# warning "This project uses features only available in iPhone SDK 3.0 and later."
-#endif
 
-#include <CFNetwork/CFNetwork.h>
-#include <CommonCrypto/CommonDigest.h>
+@interface NSObject (PhotoAccessInternal)
 
-#ifdef __OBJC__
-# import <Foundation/Foundation.h>
-# import <MobileCoreServices/MobileCoreServices.h>
-# import <QuartzCore/QuartzCore.h>
-# import <UIKit/UIKit.h>
-#endif
+- (void)PA_executeAndReleaseBlock:(void (^)())aBlock;
+
+@end
+
+
+@implementation NSObject (PhotoAccess)
+
+
+- (void)PA_executeAndReleaseBlock:(void (^)())aBlock
+{
+    if (aBlock) {
+        aBlock();
+    }
+    [aBlock release];
+}
+
+
+- (void)performBlockOnMainThread:(void (^)())aBlock waitUntilDone:(BOOL)wait
+{
+    aBlock = wait ? [aBlock retain] : [aBlock copy];
+    [self performSelectorOnMainThread:@selector(PA_executeAndReleaseBlock:)
+                           withObject:aBlock
+                        waitUntilDone:wait];
+}
+
+
+@end

@@ -25,18 +25,34 @@
  * SUCH DAMAGE.
  */
 
-#include <Availability.h>
+#import "PAConnection.h"
+#import "PAController.h"
+#import "PAPhotoResponse.h"
 
-#ifndef __IPHONE_3_0
-# warning "This project uses features only available in iPhone SDK 3.0 and later."
-#endif
 
-#include <CFNetwork/CFNetwork.h>
-#include <CommonCrypto/CommonDigest.h>
+@implementation PAConnection
 
-#ifdef __OBJC__
-# import <Foundation/Foundation.h>
-# import <MobileCoreServices/MobileCoreServices.h>
-# import <QuartzCore/QuartzCore.h>
-# import <UIKit/UIKit.h>
-#endif
+
+- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)URI
+{
+    NSObject<HTTPResponse> *response = nil;
+    NSString *filePath = [self filePathForURI:URI];
+    NSString *documentRoot = [config documentRoot];
+    if ([filePath hasPrefix:documentRoot]) {
+        NSString *path = [filePath substringFromIndex:[documentRoot length]];
+        if ([path isEqualToString:@"/photo.jpg"]) {
+            response = [[[PAPhotoResponse alloc] initWithData:[[PAController controller] photoData]] autorelease];
+        }
+        else if ([path isEqualToString:@"/photo-thumb.jpg"]) {
+            response = [[[PAPhotoResponse alloc] initWithData:[[PAController controller] photoThumbnailData]] autorelease];
+        }
+        else {
+            response = [super httpResponseForMethod:method URI:URI];
+        }
+    }
+    return response;
+}
+
+
+@end
+

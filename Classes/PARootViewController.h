@@ -28,14 +28,19 @@
 #import <UIKit/UIKit.h>
 
 
+@class PAController;
+
+
 @interface PARootViewController : UIViewController <UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 ///----------------
 /// @name IBOutlets
 ///----------------
+@property (nonatomic, retain) IBOutlet PAController *controller;
 @property (nonatomic, retain) IBOutlet UIView *imageContainerView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIView *infoContainerView;
+@property (nonatomic, retain) IBOutlet UIView *stateContainerView;
+@property (nonatomic, retain) IBOutlet UILabel *stateLabel;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *photoLibraryButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *cameraButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *infoButtonItem;
@@ -45,6 +50,5 @@
 ///----------------
 - (IBAction)presentImagePickerControllerForSender:(id)sender;
 - (IBAction)infoButtonItemDidActivate:(id)sender;
-- (IBAction)imageContainerViewDoubleTapped:(id)sender;
 
 @end
