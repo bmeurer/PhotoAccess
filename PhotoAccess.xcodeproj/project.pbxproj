@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C711EC5C13C10A0A0099EAAA /* libBMKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C711EC5B13C10A0A0099EAAA /* libBMKit.a */; };
 		C7595A2413B7C1D0001219F6 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2213B7C1D0001219F6 /* Logo.png */; };
 		C7595A2513B7C1D0001219F6 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2313B7C1D0001219F6 /* Logo@2x.png */; };
 		C7595A2C13B7C6D6001219F6 /* ImageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2813B7C6D6001219F6 /* ImageBackground.png */; };
@@ -16,7 +17,6 @@
 		C7595A4913B8A34D001219F6 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A4813B8A34D001219F6 /* UIImage+Resize.m */; };
 		C7595A4E13B8A3FC001219F6 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A4B13B8A3FC001219F6 /* UIImage+Alpha.m */; };
 		C7595A4F13B8A3FC001219F6 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A4D13B8A3FC001219F6 /* UIImage+RoundedCorner.m */; };
-		C7595A8413B8C420001219F6 /* UIImagePickerController+PhotoAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */; };
 		C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403613B723E4007BEB31 /* UIKit.framework */; };
 		C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403813B723E4007BEB31 /* Foundation.framework */; };
 		C792404413B723E4007BEB31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404313B723E4007BEB31 /* main.m */; };
@@ -50,12 +50,29 @@
 		C7E535D713B8F167005F6F07 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E535BD13B8F167005F6F07 /* DDTTYLogger.m */; };
 		C7E535E313B8F369005F6F07 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E535E213B8F369005F6F07 /* CFNetwork.framework */; };
 		C7E535E513B90039005F6F07 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = C7E535E413B90039005F6F07 /* Web */; };
-		C7F1F34013BF3A0F00F1DED1 /* NSObject+PhotoAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F1F33F13BF3A0F00F1DED1 /* NSObject+PhotoAccess.m */; };
 		C7F1F34313BF45B100F1DED1 /* PAPhotoResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F1F34213BF45B100F1DED1 /* PAPhotoResponse.m */; };
-		C7F1F34613BF803C00F1DED1 /* NSData+PhotoAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F1F34513BF803C00F1DED1 /* NSData+PhotoAccess.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C711EC5713C109F10099EAAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C711EC5013C109F00099EAAA /* BMKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C7F1F36013C05D0D00F1DED1;
+			remoteInfo = BMKit;
+		};
+		C711EC5913C10A060099EAAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C711EC5013C109F00099EAAA /* BMKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C7F1F35F13C05D0D00F1DED1;
+			remoteInfo = BMKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C711EC5013C109F00099EAAA /* BMKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BMKit.xcodeproj; path = BMKit/BMKit.xcodeproj; sourceTree = "<group>"; };
+		C711EC5B13C10A0A0099EAAA /* libBMKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBMKit.a; sourceTree = SOURCE_ROOT; };
 		C7595A2213B7C1D0001219F6 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		C7595A2313B7C1D0001219F6 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		C7595A2813B7C6D6001219F6 /* ImageBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageBackground.png; sourceTree = "<group>"; };
@@ -68,8 +85,6 @@
 		C7595A4B13B8A3FC001219F6 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		C7595A4C13B8A3FC001219F6 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		C7595A4D13B8A3FC001219F6 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
-		C7595A8213B8C420001219F6 /* UIImagePickerController+PhotoAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+PhotoAccess.h"; sourceTree = "<group>"; };
-		C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+PhotoAccess.m"; sourceTree = "<group>"; };
 		C792403213B723E4007BEB31 /* PhotoAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C792403613B723E4007BEB31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C792403813B723E4007BEB31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,12 +146,8 @@
 		C7E535BD13B8F167005F6F07 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		C7E535E213B8F369005F6F07 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C7E535E413B90039005F6F07 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
-		C7F1F33E13BF3A0F00F1DED1 /* NSObject+PhotoAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PhotoAccess.h"; sourceTree = "<group>"; };
-		C7F1F33F13BF3A0F00F1DED1 /* NSObject+PhotoAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PhotoAccess.m"; sourceTree = "<group>"; };
 		C7F1F34113BF45B100F1DED1 /* PAPhotoResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoResponse.h; sourceTree = "<group>"; };
 		C7F1F34213BF45B100F1DED1 /* PAPhotoResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoResponse.m; sourceTree = "<group>"; };
-		C7F1F34413BF803C00F1DED1 /* NSData+PhotoAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PhotoAccess.h"; sourceTree = "<group>"; };
-		C7F1F34513BF803C00F1DED1 /* NSData+PhotoAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+PhotoAccess.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C711EC5C13C10A0A0099EAAA /* libBMKit.a in Frameworks */,
 				C7E535E313B8F369005F6F07 /* CFNetwork.framework in Frameworks */,
 				C7595A3013B87685001219F6 /* CoreGraphics.framework in Frameworks */,
 				C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */,
@@ -156,6 +168,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C711EC4E13C109D40099EAAA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				C711EC5013C109F00099EAAA /* BMKit.xcodeproj */,
+				C711EC5B13C10A0A0099EAAA /* libBMKit.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		C711EC5113C109F00099EAAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C711EC5813C109F10099EAAA /* libBMKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C7595A3C13B89CCB001219F6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,25 +218,13 @@
 			path = TrevorHarmon;
 			sourceTree = "<group>";
 		};
-		C7595A8013B8C3E2001219F6 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				C7F1F34413BF803C00F1DED1 /* NSData+PhotoAccess.h */,
-				C7F1F34513BF803C00F1DED1 /* NSData+PhotoAccess.m */,
-				C7F1F33E13BF3A0F00F1DED1 /* NSObject+PhotoAccess.h */,
-				C7F1F33F13BF3A0F00F1DED1 /* NSObject+PhotoAccess.m */,
-				C7595A8213B8C420001219F6 /* UIImagePickerController+PhotoAccess.h */,
-				C7595A8313B8C420001219F6 /* UIImagePickerController+PhotoAccess.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		C792402713B723E4007BEB31 = {
 			isa = PBXGroup;
 			children = (
 				C792405013B72435007BEB31 /* Classes */,
 				C792405113B7247D007BEB31 /* Resources */,
 				C792403D13B723E4007BEB31 /* Other Sources */,
+				C711EC4E13C109D40099EAAA /* Libraries */,
 				C792403513B723E4007BEB31 /* Frameworks */,
 				C792403313B723E4007BEB31 /* Products */,
 			);
@@ -247,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				C7595A4213B8A2B4001219F6 /* External */,
-				C7595A8013B8C3E2001219F6 /* Extensions */,
 				C7E06A3013BCE87A001E3999 /* HTTP */,
 				C7595A3C13B89CCB001219F6 /* Controller */,
 			);
@@ -409,6 +425,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C711EC5A13C10A060099EAAA /* PBXTargetDependency */,
 			);
 			name = PhotoAccess;
 			productName = PhotoAccess;
@@ -433,12 +450,28 @@
 			mainGroup = C792402713B723E4007BEB31;
 			productRefGroup = C792403313B723E4007BEB31 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C711EC5113C109F00099EAAA /* Products */;
+					ProjectRef = C711EC5013C109F00099EAAA /* BMKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C792403113B723E4007BEB31 /* PhotoAccess */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C711EC5813C109F10099EAAA /* libBMKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBMKit.a;
+			remoteRef = C711EC5713C109F10099EAAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C792403013B723E4007BEB31 /* Resources */ = {
@@ -471,7 +504,6 @@
 				C7595A4913B8A34D001219F6 /* UIImage+Resize.m in Sources */,
 				C7595A4E13B8A3FC001219F6 /* UIImage+Alpha.m in Sources */,
 				C7595A4F13B8A3FC001219F6 /* UIImage+RoundedCorner.m in Sources */,
-				C7595A8413B8C420001219F6 /* UIImagePickerController+PhotoAccess.m in Sources */,
 				C7E535BE13B8F167005F6F07 /* DDData.m in Sources */,
 				C7E535BF13B8F167005F6F07 /* DDNumber.m in Sources */,
 				C7E535C013B8F167005F6F07 /* DDRange.m in Sources */,
@@ -492,18 +524,25 @@
 				C7E535D613B8F167005F6F07 /* DDLog.m in Sources */,
 				C7E535D713B8F167005F6F07 /* DDTTYLogger.m in Sources */,
 				C7E06A3313BCE8A0001E3999 /* PAConnection.m in Sources */,
-				C7F1F34013BF3A0F00F1DED1 /* NSObject+PhotoAccess.m in Sources */,
 				C7F1F34313BF45B100F1DED1 /* PAPhotoResponse.m in Sources */,
-				C7F1F34613BF803C00F1DED1 /* NSData+PhotoAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C711EC5A13C10A060099EAAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BMKit;
+			targetProxy = C711EC5913C10A060099EAAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		C792404B13B723E4007BEB31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -513,7 +552,12 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/../BMKit/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -521,6 +565,7 @@
 		C792404C13B723E4007BEB31 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -528,8 +573,13 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/../BMKit/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -552,6 +602,10 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_STYLE = debugging;
 				WRAPPER_EXTENSION = app;
@@ -578,6 +632,10 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = YES;
 				STRIP_STYLE = debugging;

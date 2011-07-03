@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-#import "NSData+PhotoAccess.h"
+#import <BMKit/BMKit.h>
 
 #import "PAPhotoResponse.h"
 
@@ -108,7 +108,7 @@
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"no-cache", @"Cache-Control",
             @"image/jpeg", @"Content-Type",
-            [[_data MD5Digest] base64Encoding], @"Content-MD5",
+            [[_data MD5] base64EncodedString], @"Content-MD5",
             @"no-cache", @"Pragma",
             nil];
 }

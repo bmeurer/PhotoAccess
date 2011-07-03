@@ -25,13 +25,13 @@
  * SUCH DAMAGE.
  */
 
+#import <BMKit/BMKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "PAController.h"
 #import "PARootViewController.h"
 #import "UIImage+Resize.h"
-#import "UIImagePickerController+PhotoAccess.h"
 
 
 @implementation PARootViewController
@@ -118,10 +118,10 @@
                          context:NULL];
         
         // Post (delayed) change notifications for "state"
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [_controller willChangeValueForKey:@"state"];
-            [_controller didChangeValueForKey:@"state"];
-        });
+        [_controller performBlockOnMainThread:^(id controller) {
+            [controller willChangeValueForKey:@"state"];
+            [controller didChangeValueForKey:@"state"];
+        } waitUntilDone:NO];
     }
 }
 

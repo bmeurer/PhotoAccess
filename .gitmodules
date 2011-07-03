@@ -1,0 +1,3 @@
+[submodule "Libraries/BMKit"]
+	path = Libraries/BMKit
+	url = git@github.com:bmeurer/BMKit.git

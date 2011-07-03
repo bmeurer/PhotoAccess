@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-#import "NSObject+PhotoAccess.h"
+#import <BMKit/BMKit.h>
 #import "UIImage+Resize.h"
 
 #import "DDTTYLogger.h"
@@ -174,7 +174,7 @@ static id PAControllerSingleton = nil;
 - (NSData *)photoData
 {
     __block NSData *photoData = nil;
-    [self performBlockOnMainThread:^() {
+    [self performBlockOnMainThread:^(id aTarget) {
         if (!_photoData && _image) {
             _photoData = [UIImageJPEGRepresentation(_image, (CGFloat)1.0f) copy];
         }
@@ -187,7 +187,7 @@ static id PAControllerSingleton = nil;
 - (NSData *)photoThumbnailData
 {
     __block NSData *photoThumbnailData = nil;
-    [self performBlockOnMainThread:^() {
+    [self performBlockOnMainThread:^(id aTarget) {
         if (!_photoThumbnailData && _image) {
             UIImage *imageThumbnail = [_image thumbnailImage:260
                                            transparentBorder:0
