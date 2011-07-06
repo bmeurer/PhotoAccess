@@ -41,10 +41,10 @@
     if ([filePath hasPrefix:documentRoot]) {
         NSString *path = [filePath substringFromIndex:[documentRoot length]];
         if ([path isEqualToString:@"/photo.jpg"]) {
-            response = [[[PAPhotoResponse alloc] initWithData:[[PAController controller] photoData]] autorelease];
+            response = [[[PAPhotoResponse alloc] initWithData:[[[PAController controller] photoInfo] JPEGData]] autorelease];
         }
         else if ([path isEqualToString:@"/photo-thumb.jpg"]) {
-            response = [[[PAPhotoResponse alloc] initWithData:[[PAController controller] photoThumbnailData]] autorelease];
+            response = [[[PAPhotoResponse alloc] initWithData:[[[PAController controller] photoInfo] JPEGThumbnailData]] autorelease];
         }
         else {
             response = [super httpResponseForMethod:method URI:URI];

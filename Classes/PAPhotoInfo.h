@@ -25,42 +25,22 @@
  * SUCH DAMAGE.
  */
 
-#import "HTTPServer.h"
-
-#import "PAPhotoInfo.h"
+#import <UIKit/UIKit.h>
 
 
-enum {
-    PAControllerStateIdle = 0,
-    PAControllerStateError,
-    PAControllerStateServing
-};
-typedef NSUInteger PAControllerStateType;
-
-
-@interface PAController : NSObject <UIApplicationDelegate> {
+@interface PAPhotoInfo : NSObject {
 @private
-    NSError              *_error;
-    HTTPServer           *_httpServer;
-    PAPhotoInfo          *_photoInfo;
-    PAControllerStateType _state;
+    NSData    *_JPEGData;
+    NSData    *_JPEGThumbnailData;
+    CGImageRef _previewImage;
 }
 
-/** The selected photo or `nil`. */
-@property (nonatomic, retain) PAPhotoInfo *photoInfo;
+@property (nonatomic, readonly) NSData *JPEGData;
+@property (nonatomic, readonly) NSData *JPEGThumbnailData;
+@property (nonatomic, readonly) CGImageRef previewImage;
 
-/** The current state of this PAController. */
-@property (nonatomic, readonly, assign) PAControllerStateType state;
-@property (nonatomic, readonly, retain) NSError *error;
-@property (nonatomic, readonly, retain) NSURL *serverURL;
-
-/** The key window. */
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-
-/** Returns the shared PAController instance.
- 
- @return The shared PAController instance.
- */
-+ (PAController *)controller;
+- (id)initWithJPEGData:(NSData *)JPEGData
+     JPEGThumbnailData:(NSData *)JPEGThumbnailData
+          previewImage:(CGImageRef)previewImage;
 
 @end

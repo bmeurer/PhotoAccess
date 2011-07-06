@@ -25,42 +25,49 @@
  * SUCH DAMAGE.
  */
 
-#import "HTTPServer.h"
-
 #import "PAPhotoInfo.h"
 
 
-enum {
-    PAControllerStateIdle = 0,
-    PAControllerStateError,
-    PAControllerStateServing
-};
-typedef NSUInteger PAControllerStateType;
+@implementation PAPhotoInfo
+
+@synthesize JPEGData = _JPEGData;
+@synthesize JPEGThumbnailData = _JPEGThumbnailData;
+@synthesize previewImage = _previewImage;
 
 
-@interface PAController : NSObject <UIApplicationDelegate> {
-@private
-    NSError              *_error;
-    HTTPServer           *_httpServer;
-    PAPhotoInfo          *_photoInfo;
-    PAControllerStateType _state;
+- (id)init
+{
+    return [self initWithJPEGData:nil
+                JPEGThumbnailData:nil
+                     previewImage:NULL];
 }
 
-/** The selected photo or `nil`. */
-@property (nonatomic, retain) PAPhotoInfo *photoInfo;
 
-/** The current state of this PAController. */
-@property (nonatomic, readonly, assign) PAControllerStateType state;
-@property (nonatomic, readonly, retain) NSError *error;
-@property (nonatomic, readonly, retain) NSURL *serverURL;
+- (id)initWithJPEGData:(NSData *)JPEGData
+     JPEGThumbnailData:(NSData *)JPEGThumbnailData
+          previewImage:(CGImageRef)previewImage
+{
+    self = [super init];
+    if (self) {
+        _JPEGData = [JPEGData copy];
+        _JPEGThumbnailData = [JPEGThumbnailData copy];
+        _previewImage = CGImageRetain(previewImage);
+        if (!_JPEGData || !_JPEGThumbnailData || !_previewImage) {
+            [self release];
+            return nil;
+        }
+    }
+    return self;
+}
 
-/** The key window. */
-@property (nonatomic, retain) IBOutlet UIWindow *window;
 
-/** Returns the shared PAController instance.
- 
- @return The shared PAController instance.
- */
-+ (PAController *)controller;
+- (void)dealloc
+{
+    [_JPEGData release], _JPEGData = nil;
+    [_JPEGThumbnailData release], _JPEGThumbnailData = nil;
+    CGImageRelease(_previewImage), _previewImage = NULL;
+    [super dealloc];
+}
+
 
 @end

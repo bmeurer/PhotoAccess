@@ -31,7 +31,6 @@
 
 #import "PAController.h"
 #import "PARootViewController.h"
-#import "UIImage+Resize.h"
 
 
 @implementation PARootViewController
@@ -69,12 +68,16 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if (object == self.controller && [keyPath isEqualToString:@"image"]) {
-        // Generate a thumbnail of the selected image and display it within the imageView
-        self.imageView.image = [self.controller.image thumbnailImage:self.imageView.frame.size.width
-                                                   transparentBorder:0
-                                                        cornerRadius:0
-                                                interpolationQuality:kCGInterpolationHigh];
+    if (object == self.controller && [keyPath isEqualToString:@"photoInfo"]) {
+        PAPhotoInfo *photoInfo = self.controller.photoInfo;
+        if (photoInfo.previewImage) {
+            self.imageView.image = [UIImage imageWithCGImage:photoInfo.previewImage
+                                                       scale:self.imageView.contentScaleFactor
+                                                 orientation:UIImageOrientationUp];
+        }
+        else {
+            self.imageView.image = nil;
+        }
     }
     else if (object == self.controller && [keyPath isEqualToString:@"state"]) {
         // TODO
@@ -102,12 +105,12 @@
 - (void)setController:(PAController *)controller
 {
     if (_controller != controller) {
-        [_controller removeObserver:self forKeyPath:@"image"];
+        [_controller removeObserver:self forKeyPath:@"photoInfo"];
         [_controller removeObserver:self forKeyPath:@"state"];
         [_controller release];
         _controller = [controller retain];
         [_controller addObserver:self
-                      forKeyPath:@"image"
+                      forKeyPath:@"photoInfo"
                          options:(NSKeyValueObservingOptionNew
                                   | NSKeyValueObservingOptionOld)
                          context:NULL];
@@ -226,9 +229,52 @@
 - (void)imagePickerController:(UIImagePickerController *)imagePickerController didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     if ([(NSString *)kUTTypeImage isEqualToString:[info objectForKey:UIImagePickerControllerMediaType]]) {
-        UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-        self.controller.image = editedImage ?: originalImage;
+        // Determine the CoreGraphics image and the orientation of the selected image
+        UIImage *selectedImage = [info objectForKey:UIImagePickerControllerEditedImage] ?: [info objectForKey:UIImagePickerControllerOriginalImage];
+        CGImageRef image = CGImageRetain(selectedImage.CGImage);
+        BMImageOrientation imageOrientation = BMImageOrientationFromUIImageOrientation(selectedImage.imageOrientation);
+
+        // Determine the preview image size (in pixels)
+        CGSize previewSize = CGSizeMake(self.imageView.frame.size.width * self.imageView.contentScaleFactor,
+                                        self.imageView.frame.size.height * self.imageView.contentScaleFactor);
+        
+        // Generate the preview image and the JPEG data for the PAPhotoInfo in the background
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+            // Rotate the image to "Up" orientation first (normalized version)
+            CGImageRef normalizedImage = BMImageCreateWithImageInOrientation(image, imageOrientation);
+            
+            // Generate the preview image for in-app display
+            CGImageRef previewImage = BMImageCreateWithImageScaledDownToAspectFill(normalizedImage,
+                                                                                   previewSize,
+                                                                                   kCGInterpolationHigh);
+            
+            // Generate the thumbnail image to display on the web interface
+            CGImageRef thumbnailImage = BMImageCreateWithImageScaledDownToAspectFill(normalizedImage,
+                                                                                     CGSizeMake((CGFloat)300.0f,
+                                                                                                (CGFloat)300.0f),
+                                                                                     kCGInterpolationHigh);
+            
+            // Generate the JPEG data for the photo and the photo thumbnail
+            NSData *JPEGData = (NSData *)BMImageCopyJPEGData(normalizedImage, UIImageOrientationUp, 1.0f);
+            NSData *JPEGThumbnailData = (NSData *)BMImageCopyJPEGData(thumbnailImage, UIImageOrientationUp, 1.0f);
+            
+            // Generate the photo information
+            PAPhotoInfo *photoInfo = [[PAPhotoInfo alloc] initWithJPEGData:JPEGData
+                                                         JPEGThumbnailData:JPEGThumbnailData
+                                                              previewImage:previewImage];
+            [_controller performBlockOnMainThread:^(id controller) {
+                [controller setPhotoInfo:photoInfo];
+            } waitUntilDone:NO];
+
+            // Cleanup
+            [JPEGThumbnailData release];
+            [JPEGData release];
+            [photoInfo release];
+            CGImageRelease(normalizedImage);
+            CGImageRelease(thumbnailImage);
+            CGImageRelease(previewImage);
+            CGImageRelease(image);
+        });
     }
     [imagePickerController dismissModalViewControllerAnimated:YES];
 }

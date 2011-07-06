@@ -26,7 +26,6 @@
  */
 
 #import <BMKit/BMKit.h>
-#import "UIImage+Resize.h"
 
 #import "DDTTYLogger.h"
 #import "PAConnection.h"
@@ -43,9 +42,7 @@
 @implementation PAController
 
 @synthesize error = _error;
-@synthesize image = _image;
-@synthesize photoData = _photoData;
-@synthesize photoThumbnailData = _photoThumbnailData;
+@synthesize photoInfo = _photoInfo;
 @synthesize state = _state;
 @synthesize window = _window;
 
@@ -110,7 +107,7 @@ static id PAControllerSingleton = nil;
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
 {
     BOOL automaticallyNotifiesObservers;
-    if ([key isEqualToString:@"image"] || [key isEqualToString:@"state"]) {
+    if ([key isEqualToString:@"photoInfo"] || [key isEqualToString:@"state"]) {
         automaticallyNotifiesObservers = NO;
     }
     else {
@@ -139,65 +136,44 @@ static id PAControllerSingleton = nil;
 }
 
 
-- (void)setImage:(UIImage *)image
+- (PAPhotoInfo *)photoInfo
 {
-    if (_image != image) {
-        [_photoData release], _photoData = nil;
-        [_photoThumbnailData release], _photoThumbnailData = nil;
-        
-        [self willChangeValueForKey:@"image"];
-        [_image release], _image = [image retain];
-        [self didChangeValueForKey:@"image"];
-        
-        if (_state != PAControllerStateIdle && !_image) {
-            [self willChangeValueForKey:@"state"];
-            [_error release], _error = nil;
-            [self.httpServer stop:NO];
-            _state = PAControllerStateIdle;
-            [self didChangeValueForKey:@"state"];
-        }
-        else if (_state != PAControllerStateServing && _image) {
-            [self willChangeValueForKey:@"state"];
-            [_error release], _error = nil;
-            if ([self.httpServer start:&_error]) {
-                _state = PAControllerStateServing;
-            }
-            else {
-                _state = PAControllerStateError;
-            }
-            [self didChangeValueForKey:@"state"];
-        }
-    }
+    __block PAPhotoInfo *photoInfo = nil;
+    [self performBlockOnMainThread:^(id aTarget) {
+        photoInfo = [_photoInfo retain];
+    } waitUntilDone:YES];
+    return [photoInfo autorelease];
 }
 
 
-- (NSData *)photoData
+- (void)setPhotoInfo:(PAPhotoInfo *)photoInfo
 {
-    __block NSData *photoData = nil;
     [self performBlockOnMainThread:^(id aTarget) {
-        if (!_photoData && _image) {
-            _photoData = [UIImageJPEGRepresentation(_image, (CGFloat)1.0f) copy];
+        if (_photoInfo != photoInfo) {
+            [self willChangeValueForKey:@"photoInfo"];
+            [_photoInfo release], _photoInfo = [photoInfo retain];
+            [self didChangeValueForKey:@"photoInfo"];
+            
+            if (_state != PAControllerStateIdle && !_photoInfo) {
+                [self willChangeValueForKey:@"state"];
+                [_error release], _error = nil;
+                [self.httpServer stop:NO];
+                _state = PAControllerStateIdle;
+                [self didChangeValueForKey:@"state"];
+            }
+            else if (_state != PAControllerStateServing && _photoInfo) {
+                [self willChangeValueForKey:@"state"];
+                [_error release], _error = nil;
+                if ([self.httpServer start:&_error]) {
+                    _state = PAControllerStateServing;
+                }
+                else {
+                    _state = PAControllerStateError;
+                }
+                [self didChangeValueForKey:@"state"];
+            }
         }
-        photoData = [_photoData copy];
     } waitUntilDone:YES];
-    return [photoData autorelease];
-}
-
-
-- (NSData *)photoThumbnailData
-{
-    __block NSData *photoThumbnailData = nil;
-    [self performBlockOnMainThread:^(id aTarget) {
-        if (!_photoThumbnailData && _image) {
-            UIImage *imageThumbnail = [_image thumbnailImage:260
-                                           transparentBorder:0
-                                                cornerRadius:0
-                                        interpolationQuality:kCGInterpolationHigh];
-            _photoThumbnailData = [UIImageJPEGRepresentation(imageThumbnail, (CGFloat)1.0f) copy];
-        }
-        photoThumbnailData = [_photoThumbnailData copy];
-    } waitUntilDone:YES];
-    return [photoThumbnailData autorelease];
 }
 
 
@@ -230,14 +206,6 @@ static id PAControllerSingleton = nil;
 
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
-{
-    // Free the JPEG photo data, will be regenerated on-demand
-    [_photoData release], _photoData = nil;
-    [_photoThumbnailData release], _photoThumbnailData = nil;
 }
 
 
