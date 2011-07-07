@@ -38,6 +38,7 @@
 @synthesize controller = _controller;
 @synthesize imageContainerView = _imageContainerView;
 @synthesize imageView = _imageView;
+@synthesize imageActivityIndicatorView = _imageActivityIndicatorView;
 @synthesize stateContainerView = _stateContainerView;
 @synthesize stateLabel = _stateLabel;
 @synthesize photoLibraryButtonItem = _photoLibraryButtonItem;
@@ -50,6 +51,7 @@
     self.controller = nil;
     self.imageContainerView = nil;
     self.imageView = nil;
+    self.imageActivityIndicatorView = nil;
     self.stateContainerView = nil;
     self.stateLabel = nil;
     self.photoLibraryButtonItem = nil;
@@ -69,6 +71,7 @@
                        context:(void *)context
 {
     if (object == self.controller && [keyPath isEqualToString:@"photoInfo"]) {
+        // Load the new photo info and setup the image view
         PAPhotoInfo *photoInfo = self.controller.photoInfo;
         if (photoInfo.previewImage) {
             self.imageView.image = [UIImage imageWithCGImage:photoInfo.previewImage
@@ -77,6 +80,26 @@
         }
         else {
             self.imageView.image = nil;
+        }
+        // Fade in imageView, fade/zoom out imageActivityIndicatorView
+        if ([self.imageView isHidden] && [self.imageActivityIndicatorView isAnimating]) {
+            self.imageView.alpha = (CGFloat)0.0f;
+            self.imageView.hidden = NO;
+            [UIView animateWithDuration:0.5 animations:^(void) {
+                self.imageView.alpha = (CGFloat)1.0f;
+                self.imageActivityIndicatorView.alpha = (CGFloat)0.0f;
+                self.imageActivityIndicatorView.transform = CGAffineTransformMakeScale((CGFloat)1.5f, (CGFloat)1.5f);
+            } completion:^(BOOL finished) {
+                [self.imageActivityIndicatorView stopAnimating];
+                self.imageActivityIndicatorView.alpha = (CGFloat)1.0f;
+                self.imageActivityIndicatorView.transform = CGAffineTransformIdentity;
+            }];
+        }
+        else if ([self.imageActivityIndicatorView isAnimating]) {
+            [self.imageActivityIndicatorView stopAnimating];
+        }
+        else {
+            self.imageView.hidden = NO;
         }
     }
     else if (object == self.controller && [keyPath isEqualToString:@"state"]) {
@@ -237,41 +260,31 @@
         // Determine the preview image size (in pixels)
         CGSize previewSize = CGSizeMake(self.imageView.frame.size.width * self.imageView.contentScaleFactor,
                                         self.imageView.frame.size.height * self.imageView.contentScaleFactor);
+
+        // Hide the image view and display an activity indicator
+        self.imageView.hidden = YES;
+        [self.imageActivityIndicatorView startAnimating];
         
         // Generate the preview image and the JPEG data for the PAPhotoInfo in the background
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
             // Rotate the image to "Up" orientation first (normalized version)
             CGImageRef normalizedImage = BMImageCreateWithImageInOrientation(image, imageOrientation);
-            
+
             // Generate the preview image for in-app display
             CGImageRef previewImage = BMImageCreateWithImageScaledDownToAspectFill(normalizedImage,
                                                                                    previewSize,
-                                                                                   kCGInterpolationHigh);
-            
-            // Generate the thumbnail image to display on the web interface
-            CGImageRef thumbnailImage = BMImageCreateWithImageScaledDownToAspectFill(normalizedImage,
-                                                                                     CGSizeMake((CGFloat)300.0f,
-                                                                                                (CGFloat)300.0f),
-                                                                                     kCGInterpolationHigh);
-            
-            // Generate the JPEG data for the photo and the photo thumbnail
-            NSData *JPEGData = (NSData *)BMImageCopyJPEGData(normalizedImage, UIImageOrientationUp, 1.0f);
-            NSData *JPEGThumbnailData = (NSData *)BMImageCopyJPEGData(thumbnailImage, UIImageOrientationUp, 1.0f);
-            
+                                                                                   kCGInterpolationDefault);
+
             // Generate the photo information
-            PAPhotoInfo *photoInfo = [[PAPhotoInfo alloc] initWithJPEGData:JPEGData
-                                                         JPEGThumbnailData:JPEGThumbnailData
-                                                              previewImage:previewImage];
+            PAPhotoInfo *photoInfo = [[PAPhotoInfo alloc] initWithNormalizedImage:normalizedImage
+                                                                     previewImage:previewImage];
             [_controller performBlockOnMainThread:^(id controller) {
                 [controller setPhotoInfo:photoInfo];
-            } waitUntilDone:NO];
+            } waitUntilDone:YES];
 
             // Cleanup
-            [JPEGThumbnailData release];
-            [JPEGData release];
             [photoInfo release];
             CGImageRelease(normalizedImage);
-            CGImageRelease(thumbnailImage);
             CGImageRelease(previewImage);
             CGImageRelease(image);
         });

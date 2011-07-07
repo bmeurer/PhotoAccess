@@ -32,15 +32,16 @@
 @private
     NSData    *_JPEGData;
     NSData    *_JPEGThumbnailData;
+    CGImageRef _normalizedImage;
     CGImageRef _previewImage;
 }
 
 @property (nonatomic, readonly) NSData *JPEGData;
 @property (nonatomic, readonly) NSData *JPEGThumbnailData;
+@property (nonatomic, readonly) CGImageRef normalizedImage;
 @property (nonatomic, readonly) CGImageRef previewImage;
 
-- (id)initWithJPEGData:(NSData *)JPEGData
-     JPEGThumbnailData:(NSData *)JPEGThumbnailData
-          previewImage:(CGImageRef)previewImage;
+- (id)initWithNormalizedImage:(CGImageRef)normalizedImage
+                 previewImage:(CGImageRef)previewImage;
 
 @end

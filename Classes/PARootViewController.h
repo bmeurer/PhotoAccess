@@ -39,6 +39,7 @@
 @property (nonatomic, retain) IBOutlet PAController *controller;
 @property (nonatomic, retain) IBOutlet UIView *imageContainerView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *imageActivityIndicatorView;
 @property (nonatomic, retain) IBOutlet UIView *stateContainerView;
 @property (nonatomic, retain) IBOutlet UILabel *stateLabel;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *photoLibraryButtonItem;

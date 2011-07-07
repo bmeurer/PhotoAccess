@@ -25,34 +25,47 @@
  * SUCH DAMAGE.
  */
 
+#import <BMKit/BMKit.h>
+
 #import "PAPhotoInfo.h"
+
+
+static dispatch_queue_t PAPhotoInfoJPEGQueue = NULL;
 
 
 @implementation PAPhotoInfo
 
 @synthesize JPEGData = _JPEGData;
 @synthesize JPEGThumbnailData = _JPEGThumbnailData;
+@synthesize normalizedImage = _normalizedImage;
 @synthesize previewImage = _previewImage;
+
+
++ (void)initialize
+{
+    if (self == [PAPhotoInfo class]) {
+        // Setup the queue used to serialize the generation of JPEG data
+        PAPhotoInfoJPEGQueue = dispatch_queue_create("de.benediktmeurer.PhotoAccess.PAPhotoInfoJPEGQueue", NULL);
+    }
+}
 
 
 - (id)init
 {
-    return [self initWithJPEGData:nil
-                JPEGThumbnailData:nil
-                     previewImage:NULL];
+    return [self initWithNormalizedImage:NULL
+                            previewImage:NULL];
 }
 
 
-- (id)initWithJPEGData:(NSData *)JPEGData
-     JPEGThumbnailData:(NSData *)JPEGThumbnailData
-          previewImage:(CGImageRef)previewImage
+- (id)initWithNormalizedImage:(CGImageRef)normalizedImage
+                 previewImage:(CGImageRef)previewImage
 {
     self = [super init];
     if (self) {
-        _JPEGData = [JPEGData copy];
-        _JPEGThumbnailData = [JPEGThumbnailData copy];
+        // Setup the normalized and preview images
+        _normalizedImage = CGImageRetain(normalizedImage);
         _previewImage = CGImageRetain(previewImage);
-        if (!_JPEGData || !_JPEGThumbnailData || !_previewImage) {
+        if (!_normalizedImage || !_previewImage) {
             [self release];
             return nil;
         }
@@ -65,8 +78,54 @@
 {
     [_JPEGData release], _JPEGData = nil;
     [_JPEGThumbnailData release], _JPEGThumbnailData = nil;
+    CGImageRelease(_normalizedImage), _normalizedImage = NULL;
     CGImageRelease(_previewImage), _previewImage = NULL;
     [super dealloc];
+}
+
+
+#pragma mark -
+#pragma mark Properties
+
+
+- (NSData *)JPEGData
+{
+    __block NSData *JPEGData = nil;
+    dispatch_sync(PAPhotoInfoJPEGQueue, ^(void) {
+        if (!_JPEGData) {
+            // Generate the JPEG data for the normalized image
+            _JPEGData = (NSData *)BMImageCopyJPEGData(_normalizedImage,
+                                                      BMImageOrientationUp,
+                                                      0.95f);
+        }
+        JPEGData = [_JPEGData copy];
+    });
+    return [JPEGData autorelease];
+}
+
+
+- (NSData *)JPEGThumbnailData
+{
+    __block NSData *JPEGThumbnailData = nil;
+    dispatch_sync(PAPhotoInfoJPEGQueue, ^(void) {
+        if (!_JPEGThumbnailData) {
+            // Generate the thumbnail image to display on the web interface
+            CGImageRef thumbnailImage = BMImageCreateWithImageScaledDownToAspectFill(_normalizedImage,
+                                                                                     CGSizeMake((CGFloat)300.0f,
+                                                                                                (CGFloat)300.0f),
+                                                                                     kCGInterpolationDefault);
+            
+            // Generate the JPEG data for the thumbnail image
+            _JPEGThumbnailData = (NSData *)BMImageCopyJPEGData(thumbnailImage,
+                                                               BMImageOrientationUp,
+                                                               0.85f);
+            
+            // Cleanup
+            CGImageRelease(thumbnailImage);
+        }
+        JPEGThumbnailData = [_JPEGThumbnailData copy];
+    });
+    return [JPEGThumbnailData autorelease];
 }
 
 
