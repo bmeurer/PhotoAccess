@@ -170,10 +170,12 @@ static id PAControllerSingleton = nil;
             _state = PAControllerStateNoNetwork;
             [self didChangeValueForKey:@"state"];
         }
-        
-        // TODO
-        [self willChangeValueForKey:@"serverURL"];
-        [self didChangeValueForKey:@"serverURL"];
+
+        // Trigger a change notification on the serverURL
+        [self performBlockOnMainThread:^(id self) {
+            [self willChangeValueForKey:@"serverURL"];
+            [self didChangeValueForKey:@"serverURL"];
+        } waitUntilDone:NO];
     }
 }
 
@@ -228,6 +230,12 @@ static id PAControllerSingleton = nil;
                 [_error release], _error = nil;
                 if ([self.httpServer start:&_error]) {
                     _state = PAControllerStateServing;
+                    
+                    // Trigger a change notification on the serverURL (web server was started)
+                    [self performBlockOnMainThread:^(id self) {
+                        [self willChangeValueForKey:@"serverURL"];
+                        [self didChangeValueForKey:@"serverURL"];
+                    } waitUntilDone:NO];
                 }
                 else {
                     _state = PAControllerStateError;
@@ -239,13 +247,13 @@ static id PAControllerSingleton = nil;
 }
 
 
-- (NSURL *)serverURL
+- (NSString *)serverURL
 {
-    NSURL *serverURL = nil;
+    NSString *serverURL = nil;
     NSString *host = [_networkController address];
     unsigned port = [_httpServer listeningPort];
     if (host && port) {
-        serverURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://%@:%d", host, port]] autorelease];
+        serverURL = [NSString stringWithFormat:@"http://%@:%d", host, port];
     }
     return serverURL;
 }

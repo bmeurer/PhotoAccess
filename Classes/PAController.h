@@ -55,7 +55,7 @@ typedef NSUInteger PAControllerStateType;
 /** The current state of this PAController. */
 @property (nonatomic, readonly, assign) PAControllerStateType state;
 @property (nonatomic, readonly, retain) NSError *error;
-@property (nonatomic, readonly, retain) NSURL *serverURL;
+@property (nonatomic, readonly, retain) NSString *serverURL;
 
 /** The key window. */
 @property (nonatomic, retain) IBOutlet UIWindow *window;

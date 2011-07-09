@@ -41,7 +41,11 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *imageActivityIndicatorView;
 @property (nonatomic, retain) IBOutlet UIView *stateContainerView;
-@property (nonatomic, retain) IBOutlet UILabel *stateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *choosePhotoLabel;
+@property (nonatomic, retain) IBOutlet UIView *downloadPhotoView;
+@property (nonatomic, retain) IBOutlet UILabel *downloadPhotoLabel;
+@property (nonatomic, retain) IBOutlet UIView *noNetworkView;
+@property (nonatomic, retain) IBOutlet UIView *warningView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *photoLibraryButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *cameraButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *infoButtonItem;

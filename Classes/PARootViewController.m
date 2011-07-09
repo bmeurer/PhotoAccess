@@ -40,7 +40,11 @@
 @synthesize imageView = _imageView;
 @synthesize imageActivityIndicatorView = _imageActivityIndicatorView;
 @synthesize stateContainerView = _stateContainerView;
-@synthesize stateLabel = _stateLabel;
+@synthesize choosePhotoLabel = _choosePhotoLabel;
+@synthesize downloadPhotoView = _downloadPhotoView;
+@synthesize downloadPhotoLabel = _downloadPhotoLabel;
+@synthesize noNetworkView = _noNetworkView;
+@synthesize warningView = _warningView;
 @synthesize photoLibraryButtonItem = _photoLibraryButtonItem;
 @synthesize cameraButtonItem = _cameraButtonItem;
 @synthesize infoButtonItem = _infoButtonItem;
@@ -53,7 +57,11 @@
     self.imageView = nil;
     self.imageActivityIndicatorView = nil;
     self.stateContainerView = nil;
-    self.stateLabel = nil;
+    self.choosePhotoLabel = nil;
+    self.downloadPhotoView = nil;
+    self.downloadPhotoLabel = nil;
+    self.noNetworkView = nil;
+    self.warningView = nil;
     self.photoLibraryButtonItem = nil;
     self.cameraButtonItem = nil;
     self.infoButtonItem = nil;
@@ -81,46 +89,16 @@
         else {
             self.imageView.image = nil;
         }
-        // Fade in imageView, fade/zoom out imageActivityIndicatorView
-        if ([self.imageView isHidden] && [self.imageActivityIndicatorView isAnimating]) {
-            self.imageView.alpha = (CGFloat)0.0f;
-            self.imageView.hidden = NO;
-            [UIView animateWithDuration:0.5 animations:^(void) {
-                self.imageView.alpha = (CGFloat)1.0f;
-                self.imageActivityIndicatorView.alpha = (CGFloat)0.0f;
-                self.imageActivityIndicatorView.transform = CGAffineTransformMakeScale((CGFloat)1.5f, (CGFloat)1.5f);
-            } completion:^(BOOL finished) {
-                [self.imageActivityIndicatorView stopAnimating];
-                self.imageActivityIndicatorView.alpha = (CGFloat)1.0f;
-                self.imageActivityIndicatorView.transform = CGAffineTransformIdentity;
-            }];
-        }
-        else if ([self.imageActivityIndicatorView isAnimating]) {
-            [self.imageActivityIndicatorView stopAnimating];
-        }
-        else {
-            self.imageView.hidden = NO;
-        }
+    }
+    else if (object == self.controller && [keyPath isEqualToString:@"serverURL"]) {
+        self.downloadPhotoLabel.text = [object serverURL];
     }
     else if (object == self.controller && [keyPath isEqualToString:@"state"]) {
-        // TODO
-        switch (self.controller.state) {
-            case PAControllerStateIdle:
-                self.stateLabel.text = @"IDLE";
-                break;
-                
-            case PAControllerStateNoNetwork:
-                self.stateLabel.text = @"NO NETWORK";
-                break;
-                
-            case PAControllerStateError:
-                self.stateLabel.text = [NSString stringWithFormat:@"ERROR: %@", self.controller.error];
-                break;
-                
-            case PAControllerStateServing:
-                self.stateLabel.text = [NSString stringWithFormat:@"SERVING AT %@", self.controller.serverURL];
-                break;
-        }
+        PAControllerStateType state = [object state];
+        self.choosePhotoLabel.hidden = (state != PAControllerStateIdle);
+        self.downloadPhotoView.hidden = (state != PAControllerStateServing);
+        self.noNetworkView.hidden = (state != PAControllerStateNoNetwork);
+        self.warningView.hidden = (state != PAControllerStateError);
     }
 }
 
@@ -133,6 +111,7 @@
 {
     if (_controller != controller) {
         [_controller removeObserver:self forKeyPath:@"photoInfo"];
+        [_controller removeObserver:self forKeyPath:@"serverURL"];
         [_controller removeObserver:self forKeyPath:@"state"];
         [_controller release];
         _controller = [controller retain];
@@ -142,13 +121,20 @@
                                   | NSKeyValueObservingOptionOld)
                          context:NULL];
         [_controller addObserver:self
+                      forKeyPath:@"serverURL"
+                         options:(NSKeyValueObservingOptionNew
+                                  | NSKeyValueObservingOptionOld)
+                         context:NULL];
+        [_controller addObserver:self
                       forKeyPath:@"state"
                          options:(NSKeyValueObservingOptionNew
                                   | NSKeyValueObservingOptionOld)
                          context:NULL];
         
-        // Post (delayed) change notifications for "state"
+        // Post change notifications for "serverURL" and "state"
         [_controller performBlockOnMainThread:^(id controller) {
+            [controller willChangeValueForKey:@"serverURL"];
+            [controller didChangeValueForKey:@"serverURL"];
             [controller willChangeValueForKey:@"state"];
             [controller didChangeValueForKey:@"state"];
         } waitUntilDone:NO];
@@ -265,9 +251,16 @@
         CGSize previewSize = CGSizeMake(self.imageView.frame.size.width * self.imageView.contentScaleFactor,
                                         self.imageView.frame.size.height * self.imageView.contentScaleFactor);
 
-        // Hide the image view and display an activity indicator
+        // Hide the image view and the state container view, and display an activity indicator
         self.imageView.hidden = YES;
+        self.stateContainerView.hidden = YES;
         [self.imageActivityIndicatorView startAnimating];
+        
+        // Temporarily disable the "Photo Library" and "Camera" toolbar items
+        BOOL photoLibraryButtonItemEnabled = self.photoLibraryButtonItem.enabled;
+        BOOL cameraButtonItemEnabled = self.cameraButtonItem.enabled;
+        self.photoLibraryButtonItem.enabled = NO;
+        self.cameraButtonItem.enabled = NO;
         
         // Generate the preview image and the JPEG data for the PAPhotoInfo in the background
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
@@ -283,8 +276,37 @@
             PAPhotoInfo *photoInfo = [[PAPhotoInfo alloc] initWithNormalizedImage:normalizedImage
                                                                      previewImage:previewImage];
             [_controller performBlockOnMainThread:^(id controller) {
+                // Setup the global photo info
                 [controller setPhotoInfo:photoInfo];
-            } waitUntilDone:YES];
+                
+                // Fade in imageView, fade/zoom out imageActivityIndicatorView
+                if ([self.imageView isHidden] && [self.imageActivityIndicatorView isAnimating]) {
+                    self.imageView.alpha = (CGFloat)0.0f;
+                    self.imageView.hidden = NO;
+                    [UIView animateWithDuration:0.5 animations:^(void) {
+                        self.imageView.alpha = (CGFloat)1.0f;
+                        self.imageActivityIndicatorView.alpha = (CGFloat)0.0f;
+                        self.imageActivityIndicatorView.transform = CGAffineTransformMakeScale((CGFloat)1.5f, (CGFloat)1.5f);
+                    } completion:^(BOOL finished) {
+                        [self.imageActivityIndicatorView stopAnimating];
+                        self.imageActivityIndicatorView.alpha = (CGFloat)1.0f;
+                        self.imageActivityIndicatorView.transform = CGAffineTransformIdentity;
+                    }];
+                }
+                else if ([self.imageActivityIndicatorView isAnimating]) {
+                    [self.imageActivityIndicatorView stopAnimating];
+                }
+                else {
+                    self.imageView.hidden = NO;
+                }
+                
+                // Show the state container again
+                self.stateContainerView.hidden = NO;
+                
+                // Reset the states of the toolbar items
+                self.photoLibraryButtonItem.enabled = photoLibraryButtonItemEnabled;
+                self.cameraButtonItem.enabled = cameraButtonItemEnabled;
+            } waitUntilDone:NO];
 
             // Cleanup
             [photoInfo release];
@@ -305,11 +327,18 @@
 {
     [super viewDidLoad];
     
-    // Recognize tap gestures on the image container view
+    // Recognize tap gestures on the image container view...
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentImagePickerControllerForSender:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.numberOfTouchesRequired = 1;
     [self.imageContainerView addGestureRecognizer:tapGestureRecognizer];
+    [tapGestureRecognizer release];
+    
+    // ...same for the "Choose Photo" label
+    tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentImagePickerControllerForSender:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    tapGestureRecognizer.numberOfTouchesRequired = 1;
+    [self.choosePhotoLabel addGestureRecognizer:tapGestureRecognizer];
     [tapGestureRecognizer release];
     
     // Add drop shadow to the image container view
