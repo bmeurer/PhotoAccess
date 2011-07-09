@@ -304,8 +304,10 @@
                 self.stateContainerView.hidden = NO;
                 
                 // Reset the states of the toolbar items
-                self.photoLibraryButtonItem.enabled = photoLibraryButtonItemEnabled;
-                self.cameraButtonItem.enabled = cameraButtonItemEnabled;
+                if (!self.photoLibraryButtonItem.enabled && !self.cameraButtonItem.enabled) {
+                    self.photoLibraryButtonItem.enabled = photoLibraryButtonItemEnabled;
+                    self.cameraButtonItem.enabled = cameraButtonItemEnabled;
+                }
             } waitUntilDone:NO];
 
             // Cleanup
