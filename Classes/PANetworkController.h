@@ -25,45 +25,22 @@
  * SUCH DAMAGE.
  */
 
-#import "HTTPServer.h"
+#include <SystemConfiguration/SystemConfiguration.h>
 
-#import "PANetworkController.h"
-#import "PAPhotoInfo.h"
-
-
-enum {
-    PAControllerStateIdle = 0,
-    PAControllerStateNoNetwork,
-    PAControllerStateError,
-    PAControllerStateServing
-};
-typedef NSUInteger PAControllerStateType;
+#import <Foundation/Foundation.h>
 
 
-@interface PAController : NSObject <UIApplicationDelegate> {
+@interface PANetworkController : NSObject {
 @private
-    NSError              *_error;
-    HTTPServer           *_httpServer;
-    PANetworkController  *_networkController;
-    PAPhotoInfo          *_photoInfo;
-    PAControllerStateType _state;
+    NSString                *_address;
+    SCNetworkReachabilityRef _networkReachability;
 }
 
-/** The selected photo or `nil`. */
-@property (nonatomic, retain) PAPhotoInfo *photoInfo;
++ (PANetworkController *)networkController;
 
-/** The current state of this PAController. */
-@property (nonatomic, readonly, assign) PAControllerStateType state;
-@property (nonatomic, readonly, retain) NSError *error;
-@property (nonatomic, readonly, retain) NSURL *serverURL;
-
-/** The key window. */
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-
-/** Returns the shared PAController instance.
- 
- @return The shared PAController instance.
- */
-+ (PAController *)controller;
+/** The WiFi network address or `nil` if not connected. */
+@property (nonatomic, readonly, retain) NSString *address;
 
 @end
+
+

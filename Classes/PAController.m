@@ -34,7 +34,7 @@
 
 @interface PAController ()
 
-@property (readonly, retain) HTTPServer *httpServer;
+@property (nonatomic, readonly, retain) HTTPServer *httpServer;
 
 @end
 
@@ -77,6 +77,29 @@ static id PAControllerSingleton = nil;
 }
 
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _networkController = [[PANetworkController networkController] retain];
+        if (!_networkController) {
+            [self release];
+            return nil;
+        }
+        [_networkController addObserver:self
+                             forKeyPath:@"address"
+                                options:(NSKeyValueObservingOptionNew
+                                         | NSKeyValueObservingOptionOld)
+                                context:NULL];
+
+        if (!_networkController.address) {
+            _state = PAControllerStateNoNetwork;
+        }
+    }
+    return self;
+}
+
+
 - (id)retain
 {
     return self;
@@ -107,13 +130,51 @@ static id PAControllerSingleton = nil;
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
 {
     BOOL automaticallyNotifiesObservers;
-    if ([key isEqualToString:@"photoInfo"] || [key isEqualToString:@"state"]) {
+    if ([key isEqualToString:@"photoInfo"] || [key isEqualToString:@"serverURL"] || [key isEqualToString:@"state"]) {
         automaticallyNotifiesObservers = NO;
     }
     else {
         automaticallyNotifiesObservers = [super automaticallyNotifiesObserversForKey:key];
     }
     return automaticallyNotifiesObservers;
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (object == _networkController && [keyPath isEqualToString:@"address"]) {
+        NSString *address = [_networkController address];
+        if (_state == PAControllerStateNoNetwork && address && _photoInfo) {
+            [self willChangeValueForKey:@"state"];
+            [_error release], _error = nil;
+            if ([self.httpServer start:&_error]) {
+                _state = PAControllerStateServing;
+            }
+            else {
+                _state = PAControllerStateError;
+            }
+            [self didChangeValueForKey:@"state"];
+        }
+        else if (_state == PAControllerStateNoNetwork && address && !_photoInfo) {
+            [self willChangeValueForKey:@"state"];
+            _state = PAControllerStateIdle;
+            [self didChangeValueForKey:@"state"];
+        }
+        else if (_state != PAControllerStateNoNetwork && !address) {
+            [self willChangeValueForKey:@"state"];
+            [_error release], _error = nil;
+            [self.httpServer stop];
+            _state = PAControllerStateNoNetwork;
+            [self didChangeValueForKey:@"state"];
+        }
+        
+        // TODO
+        [self willChangeValueForKey:@"serverURL"];
+        [self didChangeValueForKey:@"serverURL"];
+    }
 }
 
 
@@ -125,6 +186,7 @@ static id PAControllerSingleton = nil;
 {
     @synchronized(self) {
         if (!_httpServer) {
+            // Allocate the HTTPServer
             _httpServer = [[HTTPServer alloc] init];
             [_httpServer setConnectionClass:[PAConnection class]];
             [_httpServer setDocumentRoot:[[NSBundle mainBundle] pathForResource:@"Web" ofType:nil]];
@@ -154,14 +216,14 @@ static id PAControllerSingleton = nil;
             [_photoInfo release], _photoInfo = [photoInfo retain];
             [self didChangeValueForKey:@"photoInfo"];
             
-            if (_state != PAControllerStateIdle && !_photoInfo) {
+            if (_state != PAControllerStateIdle && _state != PAControllerStateNoNetwork && !_photoInfo) {
                 [self willChangeValueForKey:@"state"];
                 [_error release], _error = nil;
                 [self.httpServer stop:NO];
                 _state = PAControllerStateIdle;
                 [self didChangeValueForKey:@"state"];
             }
-            else if (_state != PAControllerStateServing && _photoInfo) {
+            else if (_state != PAControllerStateServing && _state != PAControllerStateNoNetwork && _photoInfo) {
                 [self willChangeValueForKey:@"state"];
                 [_error release], _error = nil;
                 if ([self.httpServer start:&_error]) {
@@ -180,15 +242,10 @@ static id PAControllerSingleton = nil;
 - (NSURL *)serverURL
 {
     NSURL *serverURL = nil;
-    if (self.state == PAControllerStateServing) {
-        // TODO
-        NSString *host = [self.httpServer publishedName];
-        if (host) {
-            unsigned port = [self.httpServer listeningPort];
-            if (port) {
-                serverURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://%@:%d", host, port]] autorelease];
-            }
-        }
+    NSString *host = [_networkController address];
+    unsigned port = [_httpServer listeningPort];
+    if (host && port) {
+        serverURL = [[[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://%@:%d", host, port]] autorelease];
     }
     return serverURL;
 }
@@ -203,7 +260,7 @@ static id PAControllerSingleton = nil;
     // Configure the CocoaLumberjack logging framework.
     // For now, just log everything to the Xcode console.
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -11,6 +11,8 @@
 		C711EC8E13C47C6D0099EAAA /* PAPhotoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C711EC8D13C47C6D0099EAAA /* PAPhotoInfo.m */; };
 		C711ECC813C4E7450099EAAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C711ECC713C4E7450099EAAA /* ImageIO.framework */; };
 		C711ECCA13C4F2F70099EAAA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C711ECC913C4F2F70099EAAA /* MainWindow.xib */; };
+		C72092F313C61ABB00397C66 /* PANetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = C72092F213C61ABB00397C66 /* PANetworkController.m */; };
+		C720930313C843B600397C66 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720930213C843B500397C66 /* SystemConfiguration.framework */; };
 		C7595A2413B7C1D0001219F6 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2213B7C1D0001219F6 /* Logo.png */; };
 		C7595A2513B7C1D0001219F6 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2313B7C1D0001219F6 /* Logo@2x.png */; };
 		C7595A2C13B7C6D6001219F6 /* ImageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2813B7C6D6001219F6 /* ImageBackground.png */; };
@@ -74,6 +76,9 @@
 		C711EC8D13C47C6D0099EAAA /* PAPhotoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoInfo.m; sourceTree = "<group>"; };
 		C711ECC713C4E7450099EAAA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		C711ECC913C4F2F70099EAAA /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		C72092F113C61ABB00397C66 /* PANetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANetworkController.h; sourceTree = "<group>"; };
+		C72092F213C61ABB00397C66 /* PANetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANetworkController.m; sourceTree = "<group>"; };
+		C720930213C843B500397C66 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C7595A2213B7C1D0001219F6 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		C7595A2313B7C1D0001219F6 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		C7595A2813B7C6D6001219F6 /* ImageBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageBackground.png; sourceTree = "<group>"; };
@@ -154,6 +159,7 @@
 				C711ECC813C4E7450099EAAA /* ImageIO.framework in Frameworks */,
 				C7595A3213B8768A001219F6 /* MobileCoreServices.framework in Frameworks */,
 				C792407613B78C69007BEB31 /* QuartzCore.framework in Frameworks */,
+				C720930313C843B600397C66 /* SystemConfiguration.framework in Frameworks */,
 				C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +198,8 @@
 			children = (
 				C792404513B723E4007BEB31 /* PAController.h */,
 				C792404613B723E4007BEB31 /* PAController.m */,
+				C72092F113C61ABB00397C66 /* PANetworkController.h */,
+				C72092F213C61ABB00397C66 /* PANetworkController.m */,
 				C792406C13B7380F007BEB31 /* PARootViewController.h */,
 				C792406D13B7380F007BEB31 /* PARootViewController.m */,
 			);
@@ -235,6 +243,7 @@
 				C711ECC713C4E7450099EAAA /* ImageIO.framework */,
 				C7595A3113B8768A001219F6 /* MobileCoreServices.framework */,
 				C792407513B78C69007BEB31 /* QuartzCore.framework */,
+				C720930213C843B500397C66 /* SystemConfiguration.framework */,
 				C792403613B723E4007BEB31 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -509,6 +518,7 @@
 				C7E06A3313BCE8A0001E3999 /* PAConnection.m in Sources */,
 				C7F1F34313BF45B100F1DED1 /* PAPhotoResponse.m in Sources */,
 				C711EC8E13C47C6D0099EAAA /* PAPhotoInfo.m in Sources */,
+				C72092F313C61ABB00397C66 /* PANetworkController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

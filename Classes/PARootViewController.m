@@ -109,6 +109,10 @@
                 self.stateLabel.text = @"IDLE";
                 break;
                 
+            case PAControllerStateNoNetwork:
+                self.stateLabel.text = @"NO NETWORK";
+                break;
+                
             case PAControllerStateError:
                 self.stateLabel.text = [NSString stringWithFormat:@"ERROR: %@", self.controller.error];
                 break;
