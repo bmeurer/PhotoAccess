@@ -4538,7 +4538,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 										<object class="IBUIImageView" id="594026158">
 											<reference key="NSNextResponder" ref="18015344"/>
 											<int key="NSvFlags">292</int>
-											<string key="NSFrame">{{0, -2}, {64, 64}}</string>
+											<string key="NSFrame">{{-4, -2}, {64, 64}}</string>
 											<reference key="NSSuperview" ref="18015344"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="205669008"/>

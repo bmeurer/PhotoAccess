@@ -353,8 +353,6 @@
     self.stateContainerView.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     self.stateContainerView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.stateContainerView.layer.cornerRadius = 10.0f;
-    self.stateContainerView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.stateContainerView.layer.borderWidth = 1.0f;
 
     // Enable/disable the Photo Library and Camera buttons depending on whether the
     // device includes a photo library (most probably) and/or a camera
