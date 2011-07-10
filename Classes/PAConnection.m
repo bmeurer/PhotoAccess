@@ -28,6 +28,7 @@
 #import <UIKit/UIKit.h>
 
 #import "HTTPDynamicFileResponse.h"
+#import "HTTPMessage.h"
 
 #import "PAConnection.h"
 #import "PAController.h"
@@ -66,6 +67,24 @@
         }
     }
     return [response autorelease];
+}
+
+
+- (NSData *)preprocessResponse:(HTTPMessage *)response
+{
+    // Add an ETag header with the current photoSerial
+    PAController *controller = [PAController controller];
+    [response setHeaderField:@"ETag" value:[NSString stringWithFormat:@"%d", [controller photoSerial]]];
+    
+    // Add a Server header to the response
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *serverString = [NSString stringWithFormat:@"PhotoAccess/%@ (%@) (%@/%@)",
+                              [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey],
+                              [device model], [device systemName], [device systemVersion]];
+    [response setHeaderField:@"Server" value:serverString];
+    
+    // Generate the HTTP response data
+    return [super preprocessResponse:response];
 }
 
 
