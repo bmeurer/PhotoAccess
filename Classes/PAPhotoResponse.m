@@ -33,7 +33,19 @@
 @implementation PAPhotoResponse
 
 
+- (id)init
+{
+    return [self initWithData:nil];
+}
+
+
 - (id)initWithData:(NSData *)data
+{
+    return [self initWithData:data downloadName:nil];
+}
+
+
+- (id)initWithData:(NSData *)data downloadName:(NSString *)downloadName
 {
     self = [super init];
     if (self) {
@@ -42,6 +54,7 @@
             [self release];
             return nil;
         }
+        _downloadName = [downloadName copy];
         _offset = 0;
     }
     return self;
@@ -51,6 +64,7 @@
 - (void)dealloc
 {
     [_data release];
+    [_downloadName release];
     [super dealloc];
 }
 
@@ -105,12 +119,13 @@
 
 - (NSDictionary *)httpHeaders
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"no-cache", @"Cache-Control",
-            @"image/jpeg", @"Content-Type",
-            [[_data MD5] base64EncodedString], @"Content-MD5",
-            @"no-cache", @"Pragma",
-            nil];
+    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    [headers setObject:@"image/jpeg" forKey:@"Content-Type"];
+    if (_downloadName) {
+        [headers setObject:[NSString stringWithFormat:@"attachment; filename=\"%@\"", _downloadName] forKey:@"Content-Disposition"];
+    }
+    [headers setObject:[[_data MD5] base64EncodedString] forKey:@"Content-MD5"];
+    return headers;
 }
 
 

@@ -46,11 +46,15 @@ typedef NSUInteger PAControllerStateType;
     HTTPServer           *_httpServer;
     PANetworkController  *_networkController;
     PAPhotoInfo          *_photoInfo;
+    int                   _photoSerial;
     PAControllerStateType _state;
 }
 
 /** The selected photo or `nil`. */
 @property (nonatomic, retain) PAPhotoInfo *photoInfo;
+
+/** The serial number, incremented every time a new photoInfo is set. */
+@property (nonatomic, readonly, assign) int photoSerial;
 
 /** The current state of this PAController. */
 @property (nonatomic, readonly, assign) PAControllerStateType state;

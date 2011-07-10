@@ -1,0 +1,190 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  color: #7a7a7a;
+  background: #eee;
+  font-family: "Helvetica Neue", "Helvetica", "Verdana", "Arial", "sans-serif";
+  font-size: 13px;
+  text-shadow: 1px 1px 0px white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 24px 0 12px;
+  color: #4a4a4a;
+  background: transparent;
+  font-family: "Trebuchet MS", "Helvetica", "Verdana", "Arial", "sans-serif";
+}
+
+h1 {
+  font-size: 24px;
+}
+
+img {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  outline: none;
+  color: #4f4f4f;
+}
+
+.button {
+  padding: 4px 0 4px 10px;
+  background: transparent;
+  color: white;
+  font-size: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #6f6f6f;
+  letter-spacing: .03em;
+  background: url(images/background-button.png) no-repeat left top;
+}
+
+.button span {
+  padding: 4px 10px 4px 0;
+  background: transparent url(images/background-button-span.png) no-repeat right top;
+}
+
+::selection {
+  text-shadow: none;
+  color: white;
+  background: #4F4F4F;
+}
+
+::-moz-selection {
+  text-shadow: none;
+  color: white;
+  background: #4F4F4F;
+}
+
+
+#main {
+  width: 680px;
+  margin: 0 auto;
+  clear: both;
+  text-align: center;
+}
+
+#content {
+  width: 640px;
+  float: center;
+  padding: 20px 0 40px;
+}
+
+#footer {
+  width: 640px;
+  float: left;
+  padding: 20px 0 20px;
+  background: transparent url(images/background-footer.png) repeat-x left top;
+  color: #aaa;
+}
+
+#footer a {
+  color: #8f8f8f;
+}
+
+#footer img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.curl img {
+  display:block; padding:20px;
+}
+.curl {
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #ddd;
+  position: relative;
+  background: #fff;
+  margin:10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.curl b {
+  display:block;
+  position:relative;
+}
+.curl:after,
+.curl:before,
+.curl b:before,
+.curl b:after {
+  display:block;
+  width:75%;
+  height:75%;
+  content: ""; position:absolute; z-index:-1;
+}
+.curl:after {
+  right: 0;
+  bottom:0;
+  transform-origin: bottom right;
+  -o-transform-origin: bottom right;
+  -moz-transform-origin: bottom right;
+  -webkit-transform-origin: bottom right;
+  -ms-transform-origin: bottom right;
+  transform: skew(12deg) rotate(5deg);
+  -o-transform: skew(12deg) rotate(5deg);
+  -moz-transform: skew(12deg) rotate(5deg);
+  -webkit-transform: skew(12deg) rotate(5deg);
+  -ms-transform: skew(12deg) rotate(5deg);
+  box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.4); 
+  -moz-box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.4); 
+  -webkit-box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.4);
+}
+.curl:before {
+  left:0;
+  bottom:0;
+  transform-origin: bottom left;
+  -o-transform-origin: bottom left;
+  -moz-transform-origin: bottom left;
+  -webkit-transform-origin: bottom left;
+  -ms-transform-origin: bottom left;
+  transform: skew(-12deg) rotate(-5deg); 
+  -o-transform: skew(-12deg) rotate(-5deg); 
+  -moz-transform: skew(-12deg) rotate(-5deg); 
+  -webkit-transform: skew(-12deg) rotate(-5deg); 
+  -ms-transform: skew(-12deg) rotate(-5deg); 
+  box-shadow: -4px 8px 12px rgba(0, 0, 0, 0.4); 
+  -moz-box-shadow: -4px 8px 12px rgba(0, 0, 0, 0.4); 
+  -webkit-box-shadow: -4px 8px 12px rgba(0, 0, 0, 0.4);
+}
+.curl b:after {
+  right:0;
+  top:0;
+  transform-origin: top right;
+  -o-transform-origin: top right;
+  -moz-transform-origin: top right;
+  -webkit-transform-origin: top right;
+  -ms-transform-origin: top right;
+  transform: skew(-12deg) rotate(-5deg);
+  -o-transform: skew(-12deg) rotate(-5deg);
+  -moz-transform: skew(-12deg) rotate(-5deg);
+  -webkit-transform: skew(-12deg) rotate(-5deg);
+  -ms-transform: skew(-12deg) rotate(-5deg);
+  box-shadow: 2px -4px 8px rgba(0, 0, 0, 0.4); 
+  -moz-box-shadow: 2px -4px 8px rgba(0, 0, 0, 0.4); 
+  -webkit-box-shadow: 2px -4px 8px rgba(0, 0, 0, 0.4);
+} 
+.curl b:before {
+  left:0;
+  top:0;
+  transform-origin: top left;
+  -o-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform: skew(12deg) rotate(5deg); 
+  -o-transform: skew(12deg) rotate(5deg); 
+  -moz-transform: skew(12deg) rotate(5deg); 
+  -webkit-transform: skew(12deg) rotate(5deg); 
+  -ms-transform: skew(12deg) rotate(5deg); 
+  box-shadow: -2px -4px 8px rgba(0, 0, 0, 0.4); 
+  -moz-box-shadow: -2px -4px 8px rgba(0, 0, 0, 0.4); 
+  -webkit-box-shadow: -2px -4px 8px rgba(0, 0, 0, 0.4);
+}
+

@@ -25,6 +25,10 @@
  * SUCH DAMAGE.
  */
 
+#import <UIKit/UIKit.h>
+
+#import "HTTPDynamicFileResponse.h"
+
 #import "PAConnection.h"
 #import "PAController.h"
 #import "PAPhotoResponse.h"
@@ -39,18 +43,29 @@
     NSString *filePath = [self filePathForURI:URI];
     NSString *documentRoot = [config documentRoot];
     if ([filePath hasPrefix:documentRoot]) {
+        PAController *controller = [PAController controller];
         NSString *path = [filePath substringFromIndex:[documentRoot length]];
-        if ([path isEqualToString:@"/photo.jpg"]) {
-            response = [[[PAPhotoResponse alloc] initWithData:[[[PAController controller] photoInfo] JPEGData]] autorelease];
+        if ([path isEqualToString:@"/index.html"]) {
+            NSMutableDictionary *replacementDictionary = [NSMutableDictionary dictionary];
+            [replacementDictionary setObject:[NSString stringWithFormat:@"%d", [controller photoSerial]] forKey:@"SERIAL"];
+            [replacementDictionary setObject:[[UIDevice currentDevice] name] forKey:@"NAME"];
+            response = [[HTTPDynamicFileResponse alloc] initWithFilePath:filePath
+                                                           forConnection:self
+                                                               separator:@"%%"
+                                                   replacementDictionary:replacementDictionary];
         }
-        else if ([path isEqualToString:@"/photo-thumb.jpg"]) {
-            response = [[[PAPhotoResponse alloc] initWithData:[[[PAController controller] photoInfo] JPEGThumbnailData]] autorelease];
+        else if ([path hasPrefix:@"/photo-thumb-"] && [[path pathExtension] isEqualToString:@"jpg"]) {
+            response = [[PAPhotoResponse alloc] initWithData:[[controller photoInfo] JPEGThumbnailData]];
+        }
+        else if ([path hasPrefix:@"/photo-"] && [[path pathExtension] isEqualToString:@"jpg"]) {
+            response = [[PAPhotoResponse alloc] initWithData:[[controller photoInfo] JPEGData]
+                                                downloadName:[[self parseGetParams] objectForKey:@"download"]];
         }
         else {
-            response = [super httpResponseForMethod:method URI:URI];
+            response = [[super httpResponseForMethod:method URI:URI] retain];
         }
     }
-    return response;
+    return [response autorelease];
 }
 
 

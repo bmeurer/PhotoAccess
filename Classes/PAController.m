@@ -43,6 +43,7 @@
 
 @synthesize error = _error;
 @synthesize photoInfo = _photoInfo;
+@synthesize photoSerial = _photoSerial;
 @synthesize state = _state;
 @synthesize window = _window;
 
@@ -214,6 +215,9 @@ static id PAControllerSingleton = nil;
 {
     [self performBlockOnMainThread:^(id aTarget) {
         if (_photoInfo != photoInfo) {
+            // Increment photoSerial
+            _photoSerial++;
+            
             [self willChangeValueForKey:@"photoInfo"];
             [_photoInfo release], _photoInfo = [photoInfo retain];
             [self didChangeValueForKey:@"photoInfo"];

@@ -109,11 +109,21 @@ static dispatch_queue_t PAPhotoInfoJPEGQueue = NULL;
     __block NSData *JPEGThumbnailData = nil;
     dispatch_sync(PAPhotoInfoJPEGQueue, ^(void) {
         if (!_JPEGThumbnailData) {
-            // Generate the thumbnail image to display on the web interface
-            CGImageRef thumbnailImage = BMImageCreateWithImageScaledDownToAspectFill(_normalizedImage,
-                                                                                     CGSizeMake((CGFloat)300.0f,
-                                                                                                (CGFloat)300.0f),
-                                                                                     kCGInterpolationDefault);
+            // Generate a thumbnail at max width 500 and max height 400
+            CGImageRef thumbnailImage = NULL;
+            if (_normalizedImage) {
+                CGFloat scaleWidth = (CGFloat)500.0f / CGImageGetWidth(_normalizedImage);
+                CGFloat scaleHeight = (CGFloat)400.0f / CGImageGetHeight(_normalizedImage);
+                CGFloat scale = (scaleWidth < scaleHeight) ? scaleWidth : scaleHeight;
+                if (scale < (CGFloat)1.0f) {
+                    thumbnailImage = BMImageCreateWithImageScaled(_normalizedImage,
+                                                                  scale, scale,
+                                                                  kCGInterpolationDefault);
+                }
+                else {
+                    thumbnailImage = CGImageRetain(_normalizedImage);
+                }
+            }
             
             // Generate the JPEG data for the thumbnail image
             _JPEGThumbnailData = (NSData *)BMImageCopyJPEGData(thumbnailImage,

@@ -30,10 +30,12 @@
 
 @interface PAPhotoResponse : NSObject <HTTPResponse> {
 @private
-    NSData *_data;
-    UInt64  _offset;
+    NSData   *_data;
+    NSString *_downloadName;
+    UInt64    _offset;
 }
 
 - (id)initWithData:(NSData *)data;
+- (id)initWithData:(NSData *)data downloadName:(NSString *)downloadName;
 
 @end
