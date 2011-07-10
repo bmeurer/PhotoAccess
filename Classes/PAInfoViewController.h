@@ -28,32 +28,27 @@
 #import <UIKit/UIKit.h>
 
 
-@class PAController;
+@class PANetworkController;
 @protocol PAInfoViewControllerDelegate;
 
 
-@interface PARootViewController : UIViewController <PAInfoViewControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface PAInfoViewController : UIViewController {
+@private
+    PANetworkController *_networkController;
+}
 
-///----------------
-/// @name IBOutlets
-///----------------
-@property (nonatomic, retain) IBOutlet PAController *controller;
-@property (nonatomic, retain) IBOutlet UIView *imageContainerView;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *imageActivityIndicatorView;
-@property (nonatomic, retain) IBOutlet UIView *stateContainerView;
-@property (nonatomic, retain) IBOutlet UILabel *choosePhotoLabel;
-@property (nonatomic, retain) IBOutlet UIView *downloadPhotoView;
-@property (nonatomic, retain) IBOutlet UILabel *downloadPhotoLabel;
-@property (nonatomic, retain) IBOutlet UIView *noNetworkView;
-@property (nonatomic, retain) IBOutlet UIView *warningView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *photoLibraryButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cameraButtonItem;
+@property (nonatomic, assign) id<PAInfoViewControllerDelegate> delegate;
 
-///----------------
-/// @name IBActions
-///----------------
-- (IBAction)presentImagePickerControllerForSender:(id)sender;
-- (IBAction)infoButtonItemDidActivate:(id)sender;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButtonItem;
+@property (nonatomic, retain) IBOutlet UILabel *addressLabel;
+
+- (IBAction)doneButtonItemDidActivate:(UIBarButtonItem *)doneButtonItem;
+
+@end
+
+
+@protocol PAInfoViewControllerDelegate <NSObject>
+
+- (void)infoViewControllerDidFinish:(PAInfoViewController *)infoViewController;
 
 @end

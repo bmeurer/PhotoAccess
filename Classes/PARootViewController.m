@@ -30,6 +30,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "PAController.h"
+#import "PAInfoViewController.h"
 #import "PARootViewController.h"
 
 
@@ -47,7 +48,6 @@
 @synthesize warningView = _warningView;
 @synthesize photoLibraryButtonItem = _photoLibraryButtonItem;
 @synthesize cameraButtonItem = _cameraButtonItem;
-@synthesize infoButtonItem = _infoButtonItem;
 
 
 - (void)dealloc
@@ -64,7 +64,6 @@
     self.warningView = nil;
     self.photoLibraryButtonItem = nil;
     self.cameraButtonItem = nil;
-    self.infoButtonItem = nil;
     [super dealloc];
 }
 
@@ -207,7 +206,21 @@
 
 - (IBAction)infoButtonItemDidActivate:(id)sender
 {
-    // TODO
+    PAInfoViewController *infoViewController = [[PAInfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
+    infoViewController.delegate = self;
+    infoViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:infoViewController animated:YES];
+    [infoViewController release];
+}
+
+
+#pragma mark -
+#pragma mark PAInfoViewControllerDelegate
+
+
+- (void)infoViewControllerDidFinish:(PAInfoViewController *)infoViewController
+{
+    [infoViewController dismissModalViewControllerAnimated:YES];
 }
 
 
