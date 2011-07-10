@@ -42,6 +42,7 @@
 
 @interface PANetworkController ()
 
+- (void)PA_reload;
 - (void)PA_reloadWithNetworkReachabilityFlags:(SCNetworkReachabilityFlags)flags;
 
 @end
@@ -178,13 +179,15 @@ static id PANetworkControllerSingleton = nil;
         
         _networkReachability = networkReachability;
         
-        [self performBlockOnMainThread:^(id aTarget) {
-            SCNetworkReachabilityFlags flags;
-            if (!SCNetworkReachabilityGetFlags(_networkReachability, &flags)) {
-                flags = 0;
-            }
-            [self PA_reloadWithNetworkReachabilityFlags:flags];
+        [self performBlockOnMainThread:^(id self) {
+            [self PA_reload];
         } waitUntilDone:NO];
+        
+        // Ensure to reload the status whenever we are about to enter foreground
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(PA_reload)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -209,6 +212,16 @@ static id PANetworkControllerSingleton = nil;
 
 #pragma mark -
 #pragma mark Private
+
+
+- (void)PA_reload
+{
+    SCNetworkReachabilityFlags flags;
+    if (!SCNetworkReachabilityGetFlags(_networkReachability, &flags)) {
+        flags = 0;
+    }
+    [self PA_reloadWithNetworkReachabilityFlags:flags];
+}
 
 
 - (void)PA_reloadWithNetworkReachabilityFlags:(SCNetworkReachabilityFlags)flags
