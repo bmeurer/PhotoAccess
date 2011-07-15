@@ -20,6 +20,8 @@
 		C742318B13CA005300774CD1 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C742318913CA005300774CD1 /* InfoViewController.xib */; };
 		C742318F13CA17A800774CD1 /* Screenshot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C742318E13CA17A800774CD1 /* Screenshot@2x.png */; };
 		C742319113CA1A0900774CD1 /* Screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = C742319013CA1A0900774CD1 /* Screenshot.png */; };
+		C74E7DFF13D0D0A600518E31 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C74E7DFE13D0D0A600518E31 /* Default@2x.png */; };
+		C74E7E0113D0D15600518E31 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C74E7E0013D0D15600518E31 /* Default.png */; };
 		C7595A2413B7C1D0001219F6 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2213B7C1D0001219F6 /* Logo.png */; };
 		C7595A2513B7C1D0001219F6 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2313B7C1D0001219F6 /* Logo@2x.png */; };
 		C7595A2C13B7C6D6001219F6 /* ImageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2813B7C6D6001219F6 /* ImageBackground.png */; };
@@ -99,6 +101,8 @@
 		C742318913CA005300774CD1 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		C742318E13CA17A800774CD1 /* Screenshot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot@2x.png"; sourceTree = "<group>"; };
 		C742319013CA1A0900774CD1 /* Screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot.png; sourceTree = "<group>"; };
+		C74E7DFE13D0D0A600518E31 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C74E7E0013D0D15600518E31 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C7595A2213B7C1D0001219F6 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		C7595A2313B7C1D0001219F6 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		C7595A2813B7C6D6001219F6 /* ImageBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageBackground.png; sourceTree = "<group>"; };
@@ -218,6 +222,15 @@
 			name = Domain;
 			sourceTree = "<group>";
 		};
+		C74E7E0213D0D1B400518E31 /* Launch Images */ = {
+			isa = PBXGroup;
+			children = (
+				C74E7E0013D0D15600518E31 /* Default.png */,
+				C74E7DFE13D0D0A600518E31 /* Default@2x.png */,
+			);
+			name = "Launch Images";
+			sourceTree = "<group>";
+		};
 		C7595A3C13B89CCB001219F6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +315,7 @@
 				C7B64EFE13D09FCF00765C57 /* Icons */,
 				C792406813B733E9007BEB31 /* Images */,
 				C792406413B725BF007BEB31 /* IBFiles */,
+				C74E7E0213D0D1B400518E31 /* Launch Images */,
 				C7E535E413B90039005F6F07 /* Web */,
 				C792403E13B723E4007BEB31 /* Info.plist */,
 				C792405A13B724CD007BEB31 /* LICENSE */,
@@ -540,6 +554,8 @@
 				C7B64F0A13D09FDF00765C57 /* Icon.png in Resources */,
 				C7B64F0B13D09FDF00765C57 /* Icon@2x.png in Resources */,
 				C7B64F0C13D09FDF00765C57 /* iTunesArtwork in Resources */,
+				C74E7DFF13D0D0A600518E31 /* Default@2x.png in Resources */,
+				C74E7E0113D0D15600518E31 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
