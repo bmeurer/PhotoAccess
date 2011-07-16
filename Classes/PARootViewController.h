@@ -25,14 +25,14 @@
  * SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 
 @class PAController;
 @protocol PAInfoViewControllerDelegate;
 
 
-@interface PARootViewController : UIViewController <PAInfoViewControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface PARootViewController : UIViewController <MFMailComposeViewControllerDelegate, PAInfoViewControllerDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 ///----------------
 /// @name IBOutlets
@@ -55,5 +55,6 @@
 ///----------------
 - (IBAction)presentImagePickerControllerForSender:(id)sender;
 - (IBAction)infoButtonItemDidActivate:(id)sender;
+- (IBAction)downloadPhotoViewDidActivate:(id)sender;
 
 @end

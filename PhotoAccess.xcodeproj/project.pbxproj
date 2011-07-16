@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70C20FA13D1AB5300FEA359 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70C20F913D1AB5300FEA359 /* MessageUI.framework */; };
 		C711EC5C13C10A0A0099EAAA /* libBMKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C711EC5B13C10A0A0099EAAA /* libBMKit.a */; };
 		C711EC8E13C47C6D0099EAAA /* PAPhotoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C711EC8D13C47C6D0099EAAA /* PAPhotoInfo.m */; };
 		C711ECC813C4E7450099EAAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C711ECC713C4E7450099EAAA /* ImageIO.framework */; };
@@ -84,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C70C20F913D1AB5300FEA359 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C711EC5013C109F00099EAAA /* BMKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BMKit.xcodeproj; path = BMKit/BMKit.xcodeproj; sourceTree = "<group>"; };
 		C711EC5B13C10A0A0099EAAA /* libBMKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBMKit.a; sourceTree = SOURCE_ROOT; };
 		C711EC8C13C47C6D0099EAAA /* PAPhotoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoInfo.h; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				C7595A3013B87685001219F6 /* CoreGraphics.framework in Frameworks */,
 				C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */,
 				C711ECC813C4E7450099EAAA /* ImageIO.framework in Frameworks */,
+				C70C20FA13D1AB5300FEA359 /* MessageUI.framework in Frameworks */,
 				C7595A3213B8768A001219F6 /* MobileCoreServices.framework in Frameworks */,
 				C792407613B78C69007BEB31 /* QuartzCore.framework in Frameworks */,
 				C720930313C843B600397C66 /* SystemConfiguration.framework in Frameworks */,
@@ -281,6 +284,7 @@
 				C7595A2F13B87685001219F6 /* CoreGraphics.framework */,
 				C792403813B723E4007BEB31 /* Foundation.framework */,
 				C711ECC713C4E7450099EAAA /* ImageIO.framework */,
+				C70C20F913D1AB5300FEA359 /* MessageUI.framework */,
 				C7595A3113B8768A001219F6 /* MobileCoreServices.framework */,
 				C792407513B78C69007BEB31 /* QuartzCore.framework */,
 				C720930213C843B500397C66 /* SystemConfiguration.framework */,

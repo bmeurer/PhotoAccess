@@ -150,11 +150,16 @@
     // Handling gesture recognition first
     if ([sender isKindOfClass:[UIGestureRecognizer class]]) {
         if (self.cameraButtonItem.enabled && self.photoLibraryButtonItem.enabled) {
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                                     delegate:self
-                                                            cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                       destructiveButtonTitle:nil
-                                                            otherButtonTitles:NSLocalizedString(@"Take Picture", nil), NSLocalizedString(@"Choose Existing Photo", nil), nil];
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil];
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Take Picture", nil) block:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                [self presentImagePickerControllerForSender:self.cameraButtonItem];
+            }];
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Choose Existing Photo", nil) block:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                [self presentImagePickerControllerForSender:self.photoLibraryButtonItem];
+            }];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+            }
             [actionSheet showFromRect:[self.view convertRect:[[sender view] frame]
                                                     fromView:[sender view]]
                                inView:self.view
@@ -214,6 +219,49 @@
 }
 
 
+- (IBAction)downloadPhotoViewDidActivate:(id)sender
+{
+    NSString *URL = [[self.downloadPhotoLabel.text copy] autorelease];
+    if (![URL length]) {
+        return;
+    }
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:URL];
+    if ([MFMailComposeViewController canSendMail]) {
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Mail Link", nil) block:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+            MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+            [mailComposeViewController setMailComposeDelegate:self];
+            [mailComposeViewController setMessageBody:URL isHTML:NO];
+            [self presentModalViewController:mailComposeViewController animated:YES];
+            [mailComposeViewController release];
+        }];
+    }
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Copy", nil) block:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setValue:URL forPasteboardType:(NSString *)kUTTypeUTF8PlainText];
+    }];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+    }
+    [actionSheet showFromRect:[self.view convertRect:[[sender view] frame]
+                                              toView:[sender view]]
+                       inView:self.view
+                     animated:YES];
+    [actionSheet release];
+}
+
+
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)mailComposeViewController
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [mailComposeViewController dismissModalViewControllerAnimated:YES];
+}
+
+
 #pragma mark -
 #pragma mark PAInfoViewControllerDelegate
 
@@ -221,24 +269,6 @@
 - (void)infoViewControllerDidFinish:(PAInfoViewController *)infoViewController
 {
     [infoViewController dismissModalViewControllerAnimated:YES];
-}
-
-
-#pragma mark -
-#pragma mark UIActionSheetDelegate
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0: // Take Picture
-            [self presentImagePickerControllerForSender:self.cameraButtonItem];
-            break;
-
-        case 1: // Choose Existing Photo
-            [self presentImagePickerControllerForSender:self.photoLibraryButtonItem];
-            break;
-    }
 }
 
 
@@ -354,6 +384,13 @@
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.numberOfTouchesRequired = 1;
     [self.choosePhotoLabel addGestureRecognizer:tapGestureRecognizer];
+    [tapGestureRecognizer release];
+    
+    // Recognize tap gestures on the "Download Photo" view
+    tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(downloadPhotoViewDidActivate:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    tapGestureRecognizer.numberOfTouchesRequired = 1;
+    [self.downloadPhotoView addGestureRecognizer:tapGestureRecognizer];
     [tapGestureRecognizer release];
     
     // Add drop shadow to the image container view
