@@ -82,7 +82,7 @@ static id PAControllerSingleton = nil;
 {
     self = [super init];
     if (self) {
-        _networkController = [[PANetworkController networkController] retain];
+        _networkController = [[PANetworkController alloc] init];
         if (!_networkController) {
             [self release];
             return nil;
@@ -92,12 +92,18 @@ static id PAControllerSingleton = nil;
                                 options:(NSKeyValueObservingOptionNew
                                          | NSKeyValueObservingOptionOld)
                                 context:NULL];
-
         if (!_networkController.address) {
             _state = PAControllerStateNoNetwork;
         }
     }
     return self;
+}
+
+
+- (void)dealloc
+{
+    [_networkController removeObserver:self forKeyPath:@"address"], [_networkController release], _networkController = nil;
+    [super dealloc];
 }
 
 
@@ -113,7 +119,7 @@ static id PAControllerSingleton = nil;
 }
 
 
-- (void)release
+- (oneway void)release
 {
 }
 

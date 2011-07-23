@@ -40,8 +40,7 @@
 {
     self.doneButtonItem = nil;
     self.addressLabel = nil;
-    [_networkController removeObserver:self forKeyPath:@"address"];
-    [_networkController release];
+    [_networkController removeObserver:self forKeyPath:@"address"], [_networkController release], _networkController = nil;
     [super dealloc];
 }
 
@@ -80,7 +79,7 @@
 {
     [super viewDidLoad];
 
-    _networkController = [[PANetworkController networkController] retain];
+    _networkController = [[PANetworkController alloc] init];
     [_networkController addObserver:self
                          forKeyPath:@"address"
                             options:NSKeyValueObservingOptionNew
@@ -97,8 +96,7 @@
     [super viewDidUnload];
     self.doneButtonItem = nil;
     self.addressLabel = nil;
-    [_networkController removeObserver:self forKeyPath:@"address"];
-    [_networkController release];
+    [_networkController removeObserver:self forKeyPath:@"address"], [_networkController release], _networkController = nil;
 }
 
 

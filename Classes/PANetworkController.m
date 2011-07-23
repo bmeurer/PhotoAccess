@@ -43,7 +43,6 @@
 @interface PANetworkController ()
 
 - (void)PA_reload;
-- (void)PA_reloadWithNetworkReachabilityFlags:(SCNetworkReachabilityFlags)flags;
 
 @end
 
@@ -68,74 +67,9 @@ static BOOL PANetworkIsReachableViaWiFi(SCNetworkReachabilityFlags flags)
 }
 
 
-static void PANetworkReachabilityControllerCallBack(SCNetworkReachabilityRef   target,
-                                                    SCNetworkReachabilityFlags flags,
-                                                    void                       *info)
-{
-    PANetworkController *networkController = info;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [networkController PA_reloadWithNetworkReachabilityFlags:flags];
-    [pool release];
-}
-
-
 @implementation PANetworkController
 
 @synthesize address = _address;
-
-
-#pragma mark -
-#pragma mark Singleton
-
-
-static id PANetworkControllerSingleton = nil;
-
-
-+ (PANetworkController *)networkController
-{
-    @synchronized(self) {
-        if (!PANetworkControllerSingleton) {
-            PANetworkControllerSingleton = [[self alloc] init];
-        }
-    }
-    return PANetworkControllerSingleton;
-}
-
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    @synchronized(self) {
-        if (!PANetworkControllerSingleton) {
-            PANetworkControllerSingleton = [super allocWithZone:zone];
-            return PANetworkControllerSingleton;
-        }
-    }
-    return nil;
-}
-
-
-- (id)retain
-{
-    return self;
-}
-
-
-- (NSUInteger)retainCount
-{
-    return NSUIntegerMax;
-}
-
-
-- (void)release
-{
-    
-}
-
-
-- (id)autorelease
-{
-    return self;
-}
 
 
 - (id)init
@@ -147,42 +81,13 @@ static id PANetworkControllerSingleton = nil;
         sin.sin_family = AF_INET;
         sin.sin_len = sizeof(sin);
         
-        SCNetworkReachabilityRef networkReachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault,
-                                                                                              (const struct sockaddr *)&sin);
-        if (!networkReachability) {
+        _networkReachabilityController = [[BMNetworkReachabilityController alloc] init];
+        _networkReachabilityController.delegate = self;
+        if (![_networkReachabilityController addReachabilityWithAddress:(const struct sockaddr *)&sin]) {
             [self release];
             return nil;
         }
-        
-        SCNetworkReachabilityContext context = {
-            .version = 0,
-            .info = self,
-            .retain = BMObjectRetain,
-            .release = BMObjectRelease,
-            .copyDescription = BMObjectCopyDescription
-        };
-        if (!SCNetworkReachabilitySetCallback(networkReachability,
-                                              PANetworkReachabilityControllerCallBack,
-                                              &context)) {
-            CFRelease(networkReachability);
-            [self release];
-            return nil;
-        }
-        
-        if (!SCNetworkReachabilityScheduleWithRunLoop(networkReachability,
-                                                      CFRunLoopGetMain(),
-                                                      kCFRunLoopCommonModes)) {
-            CFRelease(networkReachability);
-            [self release];
-            return nil;
-        }
-        
-        _networkReachability = networkReachability;
-        
-        [self performBlockOnMainThread:^(id self) {
-            [self PA_reload];
-        } waitUntilDone:NO];
-        
+
         // Ensure to reload the status whenever we are about to enter foreground
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(PA_reload)
@@ -190,6 +95,15 @@ static id PANetworkControllerSingleton = nil;
                                                    object:nil];
     }
     return self;
+}
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_address release], _address = nil;
+    [_networkReachabilityController setDelegate:nil], [_networkReachabilityController release], _networkReachabilityController = nil;
+    [super dealloc];
 }
 
 
@@ -216,15 +130,19 @@ static id PANetworkControllerSingleton = nil;
 
 - (void)PA_reload
 {
-    SCNetworkReachabilityFlags flags;
-    if (!SCNetworkReachabilityGetFlags(_networkReachability, &flags)) {
-        flags = 0;
-    }
-    [self PA_reloadWithNetworkReachabilityFlags:flags];
+    [self networkReachabilityController:_networkReachabilityController
+                  didChangeReachability:(SCNetworkReachabilityRef)[[_networkReachabilityController reachabilities] lastObject]
+                                  flags:[_networkReachabilityController flags]];
 }
 
 
-- (void)PA_reloadWithNetworkReachabilityFlags:(SCNetworkReachabilityFlags)flags
+#pragma mark -
+#pragma mark BMNetworkReachabilityControllerDelegate methods
+
+
+- (void)networkReachabilityController:(BMNetworkReachabilityController *)networkReachabilityController
+                didChangeReachability:(SCNetworkReachabilityRef)reachability
+                                flags:(SCNetworkReachabilityFlags)flags
 {
     NSString *address = nil;
     if (PANetworkIsReachableViaWiFi(flags)) {

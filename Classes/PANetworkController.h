@@ -25,18 +25,14 @@
  * SUCH DAMAGE.
  */
 
-#include <SystemConfiguration/SystemConfiguration.h>
-
-#import <Foundation/Foundation.h>
+#import <BMKit/BMKit.h>
 
 
-@interface PANetworkController : NSObject {
+@interface PANetworkController : NSObject <BMNetworkReachabilityControllerDelegate> {
 @private
-    NSString                *_address;
-    SCNetworkReachabilityRef _networkReachability;
+    NSString                        *_address;
+    BMNetworkReachabilityController *_networkReachabilityController;
 }
-
-+ (PANetworkController *)networkController;
 
 /** The WiFi network address or `nil` if not connected. */
 @property (nonatomic, readonly, retain) NSString *address;
