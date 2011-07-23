@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C70C20FA13D1AB5300FEA359 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70C20F913D1AB5300FEA359 /* MessageUI.framework */; };
-		C711EC5C13C10A0A0099EAAA /* libBMKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C711EC5B13C10A0A0099EAAA /* libBMKit.a */; };
 		C711EC8E13C47C6D0099EAAA /* PAPhotoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C711EC8D13C47C6D0099EAAA /* PAPhotoInfo.m */; };
 		C711ECC813C4E7450099EAAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C711ECC713C4E7450099EAAA /* ImageIO.framework */; };
 		C711ECCA13C4F2F70099EAAA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C711ECC913C4F2F70099EAAA /* MainWindow.xib */; };
 		C72092F313C61ABB00397C66 /* PANetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = C72092F213C61ABB00397C66 /* PANetworkController.m */; };
 		C720930313C843B600397C66 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720930213C843B500397C66 /* SystemConfiguration.framework */; };
 		C720930513C88C2C00397C66 /* Download.png in Resources */ = {isa = PBXBuildFile; fileRef = C720930413C88C2C00397C66 /* Download.png */; };
+		C736C25913DB7E17008E12CC /* libBMKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C711EC5813C109F10099EAAA /* libBMKit.a */; };
 		C742314E13C8C01000774CD1 /* Warning.png in Resources */ = {isa = PBXBuildFile; fileRef = C742314C13C8C01000774CD1 /* Warning.png */; };
 		C742314F13C8C01000774CD1 /* Warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C742314D13C8C01000774CD1 /* Warning@2x.png */; };
 		C742318A13CA005300774CD1 /* PAInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C742318813CA005300774CD1 /* PAInfoViewController.m */; };
@@ -87,7 +87,6 @@
 /* Begin PBXFileReference section */
 		C70C20F913D1AB5300FEA359 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C711EC5013C109F00099EAAA /* BMKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BMKit.xcodeproj; path = BMKit/BMKit.xcodeproj; sourceTree = "<group>"; };
-		C711EC5B13C10A0A0099EAAA /* libBMKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBMKit.a; sourceTree = SOURCE_ROOT; };
 		C711EC8C13C47C6D0099EAAA /* PAPhotoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoInfo.h; sourceTree = "<group>"; };
 		C711EC8D13C47C6D0099EAAA /* PAPhotoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoInfo.m; sourceTree = "<group>"; };
 		C711ECC713C4E7450099EAAA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -183,7 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C711EC5C13C10A0A0099EAAA /* libBMKit.a in Frameworks */,
+				C736C25913DB7E17008E12CC /* libBMKit.a in Frameworks */,
 				C7E535E313B8F369005F6F07 /* CFNetwork.framework in Frameworks */,
 				C7595A3013B87685001219F6 /* CoreGraphics.framework in Frameworks */,
 				C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */,
@@ -203,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				C711EC5013C109F00099EAAA /* BMKit.xcodeproj */,
-				C711EC5B13C10A0A0099EAAA /* libBMKit.a */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -499,6 +497,7 @@
 		C792402913B723E4007BEB31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "Benedikt Meurer";
 			};
 			buildConfigurationList = C792402C13B723E4007BEB31 /* Build configuration list for PBXProject "PhotoAccess" */;
@@ -665,7 +664,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoAccess-Prefix.pch";
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
 				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
@@ -695,7 +694,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoAccess-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = NS_BLOCK_ASSERTIONS;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
 				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
@@ -714,6 +713,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = YES;
 				STRIP_STYLE = debugging;
 				VALIDATE_PRODUCT = YES;
