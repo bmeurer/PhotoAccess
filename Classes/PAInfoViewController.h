@@ -41,6 +41,7 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButtonItem;
 @property (nonatomic, retain) IBOutlet UILabel *addressLabel;
+@property (nonatomic, retain) IBOutlet UILabel *versionAndCopyrightLabel;
 
 - (IBAction)doneButtonItemDidActivate:(UIBarButtonItem *)doneButtonItem;
 

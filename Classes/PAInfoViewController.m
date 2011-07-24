@@ -34,6 +34,7 @@
 @synthesize delegate = _delegate;
 @synthesize doneButtonItem = _doneButtonItem;
 @synthesize addressLabel = _addressLabel;
+@synthesize versionAndCopyrightLabel = _versionAndCopyrightLabel;
 
 
 - (void)dealloc
@@ -78,6 +79,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Generate the text for the versionAndCopyrightLabel from the Info.plist strings
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    self.versionAndCopyrightLabel.text = [NSString stringWithFormat:@"%@ %@ (%@) • © 2011 Benedikt Meurer",
+                                          [infoDictionary objectForKey:@"CFBundleDisplayName"],
+                                          [infoDictionary objectForKey:@"CFBundleShortVersionString"], 
+                                          [infoDictionary objectForKey:@"CFBundleVersion"]];
 
     _networkController = [[PANetworkController alloc] init];
     [_networkController addObserver:self
