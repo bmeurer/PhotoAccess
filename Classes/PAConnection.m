@@ -47,9 +47,14 @@
         PAController *controller = [PAController controller];
         NSString *path = [filePath substringFromIndex:[documentRoot length]];
         if ([path isEqualToString:@"/index.html"]) {
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *version = [NSString stringWithFormat:@"%@ (%@)",
+                                 [infoDictionary objectForKey:@"CFBundleShortVersionString"], 
+                                 [infoDictionary objectForKey:@"CFBundleVersion"]];
             NSMutableDictionary *replacementDictionary = [NSMutableDictionary dictionary];
-            [replacementDictionary setObject:[NSString stringWithFormat:@"%d", [controller photoSerial]] forKey:@"SERIAL"];
             [replacementDictionary setObject:[[UIDevice currentDevice] name] forKey:@"NAME"];
+            [replacementDictionary setObject:[NSString stringWithFormat:@"%d", [controller photoSerial]] forKey:@"SERIAL"];
+            [replacementDictionary setObject:version forKey:@"VERSION"];
             response = [[HTTPDynamicFileResponse alloc] initWithFilePath:filePath
                                                            forConnection:self
                                                                separator:@"%%"
