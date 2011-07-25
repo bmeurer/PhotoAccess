@@ -31,7 +31,6 @@
 		C7595A3213B8768A001219F6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7595A3113B8768A001219F6 /* MobileCoreServices.framework */; };
 		C77A255A13DDE04100887011 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C77A255813DDE04100887011 /* Localizable.strings */; };
 		C77A255C13DE036C00887011 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C77A255E13DE036C00887011 /* RootViewController.xib */; };
-		C77A256013DE061F00887011 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C77A255E13DE036C00887011 /* RootViewController.xib */; };
 		C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403613B723E4007BEB31 /* UIKit.framework */; };
 		C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403813B723E4007BEB31 /* Foundation.framework */; };
 		C792404413B723E4007BEB31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404313B723E4007BEB31 /* main.m */; };
@@ -573,7 +572,6 @@
 				C74E7E0113D0D15600518E31 /* Default.png in Resources */,
 				C77A255C13DE036C00887011 /* RootViewController.xib in Resources */,
 				C77A255A13DDE04100887011 /* Localizable.strings in Resources */,
-				C77A256013DE061F00887011 /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
