@@ -30,6 +30,7 @@
 		C7595A2D13B7C6D6001219F6 /* ImageBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7595A2913B7C6D6001219F6 /* ImageBackground@2x.png */; };
 		C7595A3013B87685001219F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7595A2F13B87685001219F6 /* CoreGraphics.framework */; };
 		C7595A3213B8768A001219F6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7595A3113B8768A001219F6 /* MobileCoreServices.framework */; };
+		C77A255A13DDE04100887011 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C77A255813DDE04100887011 /* Localizable.strings */; };
 		C792403713B723E4007BEB31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403613B723E4007BEB31 /* UIKit.framework */; };
 		C792403913B723E4007BEB31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C792403813B723E4007BEB31 /* Foundation.framework */; };
 		C792404413B723E4007BEB31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C792404313B723E4007BEB31 /* main.m */; };
@@ -112,6 +113,8 @@
 		C7595A2913B7C6D6001219F6 /* ImageBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageBackground@2x.png"; sourceTree = "<group>"; };
 		C7595A2F13B87685001219F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C7595A3113B8768A001219F6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C77A255913DDE04100887011 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C77A255B13DDE05700887011 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C792403213B723E4007BEB31 /* PhotoAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C792403613B723E4007BEB31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C792403813B723E4007BEB31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -323,6 +326,7 @@
 				C7E535E413B90039005F6F07 /* Web */,
 				C792403E13B723E4007BEB31 /* Info.plist */,
 				C792405A13B724CD007BEB31 /* LICENSE */,
+				C77A255813DDE04100887011 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -510,6 +514,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 			);
 			mainGroup = C792402713B723E4007BEB31;
 			productRefGroup = C792403313B723E4007BEB31 /* Products */;
@@ -564,6 +569,7 @@
 				C74E7DFF13D0D0A600518E31 /* Default@2x.png in Resources */,
 				C74E7E0113D0D15600518E31 /* Default.png in Resources */,
 				C736C28E13DC3125008E12CC /* RootViewController.xib in Resources */,
+				C77A255A13DDE04100887011 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +637,18 @@
 			targetProxy = C711EC5913C10A060099EAAA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C77A255813DDE04100887011 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C77A255913DDE04100887011 /* en */,
+				C77A255B13DDE05700887011 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C792404B13B723E4007BEB31 /* Debug */ = {
