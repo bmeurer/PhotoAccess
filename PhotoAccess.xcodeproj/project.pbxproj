@@ -205,12 +205,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C711EC4E13C109D40099EAAA /* Libraries */ = {
+		C711EC4E13C109D40099EAAA /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
 				C711EC5013C109F00099EAAA /* BMKit.xcodeproj */,
 			);
-			path = Libraries;
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		C711EC5113C109F00099EAAA /* Products */ = {
@@ -268,7 +268,7 @@
 				C792405013B72435007BEB31 /* Classes */,
 				C792405113B7247D007BEB31 /* Resources */,
 				C792403D13B723E4007BEB31 /* Other Sources */,
-				C711EC4E13C109D40099EAAA /* Libraries */,
+				C711EC4E13C109D40099EAAA /* Vendor */,
 				C792403513B723E4007BEB31 /* Frameworks */,
 				C792403313B723E4007BEB31 /* Products */,
 			);
@@ -737,6 +737,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADER_SEARCH_PATHS = Vendor/BMKit;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -767,10 +768,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(BUILT_PRODUCTS_DIR)/../BMKit/**",
-					"$(BUILT_PRODUCTS_DIR)/../../BMKit/**",
-				);
+				HEADER_SEARCH_PATHS = Vendor/BMKit;
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LIBRARY_SEARCH_PATHS = (
