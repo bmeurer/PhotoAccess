@@ -1,3 +1,6 @@
 [submodule "Vendor/BMKit"]
 	path = Vendor/BMKit
 	url = git://github.com/bmeurer/BMKit.git
+[submodule "Vendor/cocoahttpserver"]
+	path = Vendor/cocoahttpserver
+	url = git://github.com/bmeurer/cocoahttpserver.git
