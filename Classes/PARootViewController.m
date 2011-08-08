@@ -55,6 +55,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.controller = [PAController controller];
+        self.wantsFullScreenLayout = YES;
     }
     return self;
 }
