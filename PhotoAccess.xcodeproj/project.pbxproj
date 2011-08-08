@@ -118,7 +118,6 @@
 		C792404313B723E4007BEB31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C792404513B723E4007BEB31 /* PAController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAController.h; sourceTree = "<group>"; };
 		C792404613B723E4007BEB31 /* PAController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAController.m; sourceTree = "<group>"; };
-		C792405A13B724CD007BEB31 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C792406C13B7380F007BEB31 /* PARootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARootViewController.h; sourceTree = "<group>"; };
 		C792406D13B7380F007BEB31 /* PARootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARootViewController.m; sourceTree = "<group>"; };
 		C792407513B78C69007BEB31 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -273,7 +272,6 @@
 				C74E7E0213D0D1B400518E31 /* Launch Images */,
 				C7E535E413B90039005F6F07 /* Web */,
 				C792403E13B723E4007BEB31 /* Info.plist */,
-				C792405A13B724CD007BEB31 /* LICENSE */,
 				C77A255813DDE04100887011 /* Localizable.strings */,
 			);
 			name = Resources;
