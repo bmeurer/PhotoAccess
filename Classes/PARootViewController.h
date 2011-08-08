@@ -27,9 +27,10 @@
 
 #import <MessageUI/MessageUI.h>
 
+#import "PAInfoViewController.h"
+
 
 @class PAController;
-@protocol PAInfoViewControllerDelegate;
 
 
 @interface PARootViewController : UIViewController <MFMailComposeViewControllerDelegate, PAInfoViewControllerDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -58,3 +59,4 @@
 - (IBAction)downloadPhotoViewDidActivate:(id)sender;
 
 @end
+

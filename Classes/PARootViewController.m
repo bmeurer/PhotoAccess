@@ -50,6 +50,16 @@
 @synthesize cameraButtonItem = _cameraButtonItem;
 
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.controller = [PAController controller];
+    }
+    return self;
+}
+
+
 - (void)dealloc
 {
     self.controller = nil;

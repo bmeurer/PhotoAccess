@@ -30,6 +30,7 @@
 #import "DDTTYLogger.h"
 #import "PAConnection.h"
 #import "PAController.h"
+#import "PARootViewController.h"
 
 
 @interface PAController ()
@@ -279,7 +280,11 @@ static id PAControllerSingleton = nil;
     // For now, just log everything to the Xcode console.
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window.backgroundColor = [UIColor blackColor];
+    self.window.rootViewController = [[[PARootViewController alloc] initWithNibName:@"RootViewController" bundle:nil] autorelease];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
