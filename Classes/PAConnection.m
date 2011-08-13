@@ -25,21 +25,25 @@
  * SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+#import <BMKit/BMKit.h>
 
 #import "HTTPDynamicFileResponse.h"
 #import "HTTPMessage.h"
 
 #import "PAConnection.h"
 #import "PAController.h"
+#import "PANetworkActivityIndicatorController.h"
 #import "PAPhotoResponse.h"
 
 
 @implementation PAConnection
 
+static const char *const PAConnectionNetworkActivityControllerKey = "PAConnectionNetworkActivityController";
+
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)URI
 {
+    PANetworkActivityIndicatorController *networkActivityIndicatorController = [PANetworkActivityIndicatorController networkActivityIndicatorController];
     NSObject<HTTPResponse> *response = nil;
     NSString *filePath = [self filePathForURI:URI];
     NSString *documentRoot = [config documentRoot];
@@ -71,6 +75,8 @@
             response = [[super httpResponseForMethod:method URI:URI] retain];
         }
     }
+    [response setAssociatedObject:networkActivityIndicatorController
+                           forKey:&PAConnectionNetworkActivityControllerKey];
     return [response autorelease];
 }
 
@@ -89,7 +95,10 @@
     [response setHeaderField:@"Server" value:serverString];
     
     // Generate the HTTP response data
-    return [super preprocessResponse:response];
+    NSData *data = [super preprocessResponse:response];
+    [data setAssociatedObject:[response associatedObjectForKey:&PAConnectionNetworkActivityControllerKey]
+                       forKey:&PAConnectionNetworkActivityControllerKey];
+    return data;
 }
 
 

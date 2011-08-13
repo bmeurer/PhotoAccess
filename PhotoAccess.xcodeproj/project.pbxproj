@@ -44,6 +44,7 @@
 		C7B64F0B13D09FDF00765C57 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B64F0413D09FDF00765C57 /* Icon@2x.png */; };
 		C7D19F9313F6E48E006C15C8 /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C7D19F9113F6E48E006C15C8 /* InfoBackground.png */; };
 		C7D19F9413F6E48E006C15C8 /* InfoBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7D19F9213F6E48E006C15C8 /* InfoBackground@2x.png */; };
+		C7D19FA813F6EE95006C15C8 /* PANetworkActivityIndicatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D19FA713F6EE95006C15C8 /* PANetworkActivityIndicatorController.m */; };
 		C7E06A3313BCE8A0001E3999 /* PAConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E06A3213BCE8A0001E3999 /* PAConnection.m */; };
 		C7E535E313B8F369005F6F07 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E535E213B8F369005F6F07 /* CFNetwork.framework */; };
 		C7E535E513B90039005F6F07 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = C7E535E413B90039005F6F07 /* Web */; };
@@ -131,6 +132,8 @@
 		C7B64F0413D09FDF00765C57 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C7D19F9113F6E48E006C15C8 /* InfoBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBackground.png; sourceTree = "<group>"; };
 		C7D19F9213F6E48E006C15C8 /* InfoBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoBackground@2x.png"; sourceTree = "<group>"; };
+		C7D19FA613F6EE95006C15C8 /* PANetworkActivityIndicatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANetworkActivityIndicatorController.h; sourceTree = "<group>"; };
+		C7D19FA713F6EE95006C15C8 /* PANetworkActivityIndicatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANetworkActivityIndicatorController.m; sourceTree = "<group>"; };
 		C7E06A3113BCE8A0001E3999 /* PAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAConnection.h; sourceTree = "<group>"; };
 		C7E06A3213BCE8A0001E3999 /* PAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAConnection.m; sourceTree = "<group>"; };
 		C7E535E213B8F369005F6F07 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -204,6 +207,8 @@
 				C792404613B723E4007BEB31 /* PAController.m */,
 				C742318713CA005300774CD1 /* PAInfoViewController.h */,
 				C742318813CA005300774CD1 /* PAInfoViewController.m */,
+				C7D19FA613F6EE95006C15C8 /* PANetworkActivityIndicatorController.h */,
+				C7D19FA713F6EE95006C15C8 /* PANetworkActivityIndicatorController.m */,
 				C72092F113C61ABB00397C66 /* PANetworkController.h */,
 				C72092F213C61ABB00397C66 /* PANetworkController.m */,
 				C792406C13B7380F007BEB31 /* PARootViewController.h */,
@@ -482,6 +487,7 @@
 				C711EC8E13C47C6D0099EAAA /* PAPhotoInfo.m in Sources */,
 				C72092F313C61ABB00397C66 /* PANetworkController.m in Sources */,
 				C742318A13CA005300774CD1 /* PAInfoViewController.m in Sources */,
+				C7D19FA813F6EE95006C15C8 /* PANetworkActivityIndicatorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
