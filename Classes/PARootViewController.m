@@ -317,7 +317,7 @@
         self.cameraButtonItem.enabled = NO;
         
         // Generate the preview image and the JPEG data for the PAPhotoInfo in the background
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
             // Rotate the image to "Up" orientation first (normalized version)
             CGImageRef normalizedImage = BMImageCreateWithImageInOrientation(image, imageOrientation);
 
