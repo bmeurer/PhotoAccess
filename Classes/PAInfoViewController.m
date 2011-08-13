@@ -79,7 +79,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    // Setup background image
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"InfoBackground"]];
+    
     // Generate the text for the versionAndCopyrightLabel from the Info.plist strings
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     self.versionAndCopyrightLabel.text = [NSString stringWithFormat:@"%@ %@ (%@) • © 2011 Benedikt Meurer",

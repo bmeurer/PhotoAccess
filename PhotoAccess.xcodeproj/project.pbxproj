@@ -42,6 +42,8 @@
 		C7B64F0913D09FDF00765C57 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B64F0213D09FDF00765C57 /* Icon-Small@2x.png */; };
 		C7B64F0A13D09FDF00765C57 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B64F0313D09FDF00765C57 /* Icon.png */; };
 		C7B64F0B13D09FDF00765C57 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B64F0413D09FDF00765C57 /* Icon@2x.png */; };
+		C7D19F9313F6E48E006C15C8 /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C7D19F9113F6E48E006C15C8 /* InfoBackground.png */; };
+		C7D19F9413F6E48E006C15C8 /* InfoBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7D19F9213F6E48E006C15C8 /* InfoBackground@2x.png */; };
 		C7E06A3313BCE8A0001E3999 /* PAConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E06A3213BCE8A0001E3999 /* PAConnection.m */; };
 		C7E535E313B8F369005F6F07 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E535E213B8F369005F6F07 /* CFNetwork.framework */; };
 		C7E535E513B90039005F6F07 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = C7E535E413B90039005F6F07 /* Web */; };
@@ -127,6 +129,8 @@
 		C7B64F0213D09FDF00765C57 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		C7B64F0313D09FDF00765C57 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		C7B64F0413D09FDF00765C57 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		C7D19F9113F6E48E006C15C8 /* InfoBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBackground.png; sourceTree = "<group>"; };
+		C7D19F9213F6E48E006C15C8 /* InfoBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoBackground@2x.png"; sourceTree = "<group>"; };
 		C7E06A3113BCE8A0001E3999 /* PAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAConnection.h; sourceTree = "<group>"; };
 		C7E06A3213BCE8A0001E3999 /* PAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAConnection.m; sourceTree = "<group>"; };
 		C7E535E213B8F369005F6F07 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -289,6 +293,8 @@
 		C792406813B733E9007BEB31 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C7D19F9113F6E48E006C15C8 /* InfoBackground.png */,
+				C7D19F9213F6E48E006C15C8 /* InfoBackground@2x.png */,
 				C742319013CA1A0900774CD1 /* Screenshot.png */,
 				C742318E13CA17A800774CD1 /* Screenshot@2x.png */,
 				C720930413C88C2C00397C66 /* Download.png */,
@@ -438,6 +444,8 @@
 				C74E7E0113D0D15600518E31 /* Default.png in Resources */,
 				C77A255C13DE036C00887011 /* RootViewController.xib in Resources */,
 				C77A255A13DDE04100887011 /* Localizable.strings in Resources */,
+				C7D19F9313F6E48E006C15C8 /* InfoBackground.png in Resources */,
+				C7D19F9413F6E48E006C15C8 /* InfoBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
